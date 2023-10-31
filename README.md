@@ -1,2 +1,2 @@
 # shank3mrs
-MRS study in SHANK3 mcie. 
+MRS study in SHANK3 mice. 
