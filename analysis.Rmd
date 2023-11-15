@@ -28,3 +28,44 @@ plot(pressure)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+code
+for linux terminal on HPC (python)
+1. source ~/.bashrc
+2. module load anaconda3
+3. conda activate spec2nii
+4. cd /project/4180000.24/test
+5. spec2nii bruker -m FID -o /project/4180000.24/test ./20221114_134901_aRi001_1_1_1/18/fid
+
+for rstudio window on HPC (R)
+1. `cd ~/R/x86_64-pc-linux-gnu-library/4.1`
+2. rm -rf 00LOCK*
+3. rstudio
+4. ## R version 4.1.0, RStudio version 1.4.1717, 8GB-16GB, load preinstalled packages 
+5. install.packages(“spant”)
+6. library(spant)
+7. mrs_data <- read_mrs('test/FID_001_18.nii.gz',format = 'nifti')
+8. # for observed spectrum
+x_values <- seq(8, 0.5, by = -0.5)
+#axis(side = 1, at = seq(8, 0.5, by = -0.5), labels = seq(8, 0.5, by = -0.5))
+#axis(1, at = seq(8, 0.5, by = -0.5), labels = seq(8, 0.5, by = -0.5))
+plot(mrs_data, xlim=c(4,0.5))
+#title(main = "Observed Spectrum for Thalamus Scan")
+
+9. #for fitted and observed spectrum with basisplot information of concentraion
+mrs_data <- read_mrs('test/FID_20.nii.gz', format = 'nifti')
+mrs_proc<- hsvd_filt(mrs_data,xlim = c(8,6),scale = 'ppm') #|> shift(-1.58)
+plot(mrs_proc,xlim=c(4,0.5))
+
+basis <- sim_basis_1h_brain_press(mrs_data)
+print(basis)
+
+stackplot(basis, xlim = c(5.5, 0.5), labels = basis$names, y_offset = 10)
+fit_res <- fit_mrs(mrs_proc, basis, opts = abfit_opts(noise_region = c(6, 8)))
+plot(fit_res)
+
+amps <- fit_amps(fit_res)
+amps
+
+##lcbasis <- read_basis_ac('assests/basis/BiospecPRESS_16ms11T7.BASIS')
+##print(lcbasis)
