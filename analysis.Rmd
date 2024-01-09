@@ -6,53 +6,25 @@ output: github_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
-## GitHub Documents
-
 This is an R Markdown format used for publishing markdown documents to GitHub. When you click the **Knit** button all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
 
-## Including Code
+## code for linux terminal on HPC (python) ##
+source ~/.bashrc
+module load anaconda3
+conda activate spec2nii
+cd /project/4180000.24/test
+spec2nii bruker -m FID -o /project/4180000.24/test ./20221114_134901_aRi001_1_1_1/18/fid
 
-You can include R code in the document as follows:
+## for rstudio window on HPC (R) ##
+`cd ~/R/x86_64-pc-linux-gnu-library/4.1`
+rm -rf 00LOCK*
+rstudio
+    # R version 4.1.0, RStudio version 1.4.1717, 8GB-16GB, load preinstalled packages 
+install.packages(“spant”)
+ibrary(spant)
+mrs_data <- read_mrs('test/FID_001_18.nii.gz',format = 'nifti')
 
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
-
-code
-for linux terminal on HPC (python)
-1. source ~/.bashrc
-2. module load anaconda3
-3. conda activate spec2nii
-4. cd /project/4180000.24/test
-5. spec2nii bruker -m FID -o /project/4180000.24/test ./20221114_134901_aRi001_1_1_1/18/fid
-
-for rstudio window on HPC (R)
-1. `cd ~/R/x86_64-pc-linux-gnu-library/4.1`
-2. rm -rf 00LOCK*
-3. rstudio
-4. ## R version 4.1.0, RStudio version 1.4.1717, 8GB-16GB, load preinstalled packages 
-5. install.packages(“spant”)
-6. library(spant)
-7. mrs_data <- read_mrs('test/FID_001_18.nii.gz',format = 'nifti')
-8. # for observed spectrum
-x_values <- seq(8, 0.5, by = -0.5)
-#axis(side = 1, at = seq(8, 0.5, by = -0.5), labels = seq(8, 0.5, by = -0.5))
-#axis(1, at = seq(8, 0.5, by = -0.5), labels = seq(8, 0.5, by = -0.5))
-plot(mrs_data, xlim=c(4,0.5))
-#title(main = "Observed Spectrum for Thalamus Scan")
-
-9. #for fitted and observed spectrum with basisplot information of concentraion
+## for fitted and observed spectrum with basisplot information of concentraion ##
 mrs_data <- read_mrs('test/FID_20.nii.gz', format = 'nifti')
 mrs_proc<- hsvd_filt(mrs_data,xlim = c(8,6),scale = 'ppm') #|> shift(-1.58)
 plot(mrs_proc,xlim=c(4,0.5))
@@ -67,5 +39,16 @@ plot(fit_res)
 amps <- fit_amps(fit_res)
 amps
 
+print(amps)
+
+result <- amps
+t_result <- t(result)
+
+print(t(result))
+
+amps_file <- (t(result))
+amps_output <- "amps_output.txt"
+write.table(amps_file, file = file_path, sep = "\t", quote = FALSE)
 ##lcbasis <- read_basis_ac('assests/basis/BiospecPRESS_16ms11T7.BASIS')
 ##print(lcbasis)
+
