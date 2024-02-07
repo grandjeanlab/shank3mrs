@@ -1,5 +1,5 @@
 ---
-title: "Untitled"
+title: "MRS_ct"
 output: github_document
 ---
 
@@ -8,47 +8,48 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 This is an R Markdown format used for publishing markdown documents to GitHub. When you click the **Knit** button all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
 
-## code for linux terminal on HPC (python) ##
+**## code for linux terminal on HPC (python) ##**
 source ~/.bashrc
 module load anaconda3
 conda activate spec2nii
 cd /project/4180000.24/test
 spec2nii bruker -m FID -o /project/4180000.24/test ./20221114_134901_aRi001_1_1_1/18/fid
 
-## for rstudio window on HPC (R) ##
+**## for rstudio window on HPC (R) ##**
 `cd ~/R/x86_64-pc-linux-gnu-library/4.1`
 rm -rf 00LOCK*
-rstudio
-    # R version 4.1.0, RStudio version 1.4.1717, 8GB-16GB, load preinstalled packages 
+rstudio # R version 4.1.0, RStudio version 1.4.1717, 8GB-16GB, load preinstalled packages 
 install.packages(“spant”)
 ibrary(spant)
-mrs_data <- read_mrs('test/FID_001_18.nii.gz',format = 'nifti')
 
-## for fitted and observed spectrum with basisplot information of concentraion ##
-mrs_data <- read_mrs('test/FID_20.nii.gz', format = 'nifti')
-mrs_proc<- hsvd_filt(mrs_data,xlim = c(8,6),scale = 'ppm') #|> shift(-1.58)
-plot(mrs_proc,xlim=c(4,0.5))
+**## for fitted and observed spectrum with basis plot information of concentration ##**
+  mrs_data <- read_mrs(file_name, format = "nifti") #example --> mrs_data <- read_mrs('test/FID_001_18.nii.gz')
+  mrs_proc <- hsvd_filt(mrs_data, xlim = c(8, 6), scale = "ppm") |> shift(-1.90)
+  plot(mrs_proc, xlim = c(4, 0.5))
 
-basis <- sim_basis_1h_brain_press(mrs_data)
-print(basis)
+  basis <- sim_basis_1h_brain_press(mrs_data)
+  print(basis)
 
-stackplot(basis, xlim = c(5.5, 0.5), labels = basis$names, y_offset = 10)
-fit_res <- fit_mrs(mrs_proc, basis, opts = abfit_opts(noise_region = c(6, 8)))
-plot(fit_res)
+  stackplot(basis, xlim = c(5.5, 0.5), labels = basis$names, y_offset = 10)
+  fit_res <- fit_mrs(mrs_proc, basis, opts = abfit_opts(noise_region = c(6, 8)))
+  plot(fit_res)
 
-amps <- fit_amps(fit_res)
-amps
+  amps <- fit_amps(fit_res)
+  print(amps)
 
-print(amps)
+  result <- amps
+  t_result <- t(result)
+  print(t_result) #transposes and prints concentration values as a txt file 
 
-result <- amps
-t_result <- t(result)
+**## automated code to select a working row from csv file of scan information ##**
 
-print(t(result))
+install.packages(c("SpecHelpers", "metaboliteID", "NMRProc")) #install required packages 
+library(c(SpecHelpers, metaboliteID, NMRProc))
 
-amps_file <- (t(result))
-amps_output <- "amps_output.txt"
-write.table(amps_file, file = file_path, sep = "\t", quote = FALSE)
-##lcbasis <- read_basis_ac('assests/basis/BiospecPRESS_16ms11T7.BASIS')
-##print(lcbasis)
+install.packages(c("readxl", "spant", "readr"))
+library (c(readx, spant, readr))
 
+xlsxcsv <- "xlsxcoding.csv"  #read in CSV file
+fid_data <- read.csv(xlsxcsv, show_col_types = FALSE)
+
+setwd('/content/fids')
