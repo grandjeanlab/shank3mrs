@@ -53,3 +53,32 @@ xlsxcsv <- "xlsxcoding.csv"  #read in CSV file
 fid_data <- read.csv(xlsxcsv, show_col_types = FALSE)
 
 setwd('/content/fids')
+
+for (i in 1:nrow(fid_data))
+
+ {
+  fid_subject <- fid_data$file_name[i]
+  file_name <- paste0(fid_subject, ".nii.gz")
+
+  mrs_data <- read_mrs(file_name, format = "nifti")
+  mrs_proc <- hsvd_filt(mrs_data, xlim = c(8, 6), scale = "ppm") |> shift(-shift)
+  plot(mrs_proc, xlim = c(4, 0.5))
+
+  basis <- sim_basis_1h_brain_press(mrs_data)
+  print(basis)
+
+  stackplot(basis, xlim = c(5.5, 0.5), labels = basis$names, y_offset = 10)
+  fit_res <- fit_mrs(mrs_proc, basis, opts = abfit_opts(noise_region = c(6, 8)))
+  plot(fit_res)
+
+  amps <- fit_amps(fit_res)
+  print(amps)
+
+  result <- amps
+  t_result <- t(result)
+  print(t_result)
+
+  png(filename = paste0(fid_subject, "file_namespectrum.png"))
+  plot(mrs_proc, xlim = c(4, 0.5))
+  dev.off()
+}
