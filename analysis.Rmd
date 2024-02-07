@@ -8,21 +8,21 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 This is an R Markdown format used for publishing markdown documents to GitHub. When you click the **Knit** button all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
 
-**## code for linux terminal on HPC (python) ##**
+** ## code for linux terminal on HPC (python) ## **
 source ~/.bashrc
 module load anaconda3
 conda activate spec2nii
 cd /project/4180000.24/test
 spec2nii bruker -m FID -o /project/4180000.24/test ./20221114_134901_aRi001_1_1_1/18/fid
 
-**## for rstudio window on HPC (R) ##**
+** ## for rstudio window on HPC (R) ## **
 `cd ~/R/x86_64-pc-linux-gnu-library/4.1`
 rm -rf 00LOCK*
 rstudio # R version 4.1.0, RStudio version 1.4.1717, 8GB-16GB, load preinstalled packages 
 install.packages(“spant”)
 ibrary(spant)
 
-**## for fitted and observed spectrum with basis plot information of concentration ##**
+** ## for fitted and observed spectrum with basis plot information of concentration ## **
   mrs_data <- read_mrs(file_name, format = "nifti") #example --> mrs_data <- read_mrs('test/FID_001_18.nii.gz')
   mrs_proc <- hsvd_filt(mrs_data, xlim = c(8, 6), scale = "ppm") |> shift(-1.90)
   plot(mrs_proc, xlim = c(4, 0.5))
@@ -41,7 +41,7 @@ ibrary(spant)
   t_result <- t(result)
   print(t_result) #transposes and prints concentration values as a txt file 
 
-**## automated code to select a working row from csv file of scan information ##**
+** ## automated code to select a working row from csv file of scan information ## **
 
 install.packages(c("SpecHelpers", "metaboliteID", "NMRProc")) #install required packages 
 library(c(SpecHelpers, metaboliteID, NMRProc))
