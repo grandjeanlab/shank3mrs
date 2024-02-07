@@ -78,7 +78,7 @@ for (i in 1:nrow(fid_data))
   t_result <- t(result)
   print(t_result)
 
-  png(filename = paste0(fid_subject, "file_namespectrum.png"))
-  plot(mrs_proc, xlim = c(4, 0.5))
+  png(filename = paste0(fid_subject, "_spectrum.png"))
+  plot(mrs_proc, xlim = c(4, 0.5), main = fid_subject)
   dev.off()
 }
