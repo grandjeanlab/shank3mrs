@@ -20,7 +20,9 @@ spec2nii bruker -m FID -o /project/4180000.24/test ./20221114_134901_aRi001_1_1_
 rm -rf 00LOCK*
 rstudio # R version 4.1.0, RStudio version 1.4.1717, 8GB-16GB, load preinstalled packages 
 install.packages(“spant”)
-ibrary(spant)
+library(spant)
+#if there is a non zero exit code, delete 00LOCK
+
 
 ** ## for fitted and observed spectrum with basis plot information of concentration ## **
   mrs_data <- read_mrs(file_name, format = "nifti") #example --> mrs_data <- read_mrs('test/FID_001_18.nii.gz')
