@@ -85,3 +85,34 @@ for (i in 1:nrow(fid_data))
   plot(mrs_proc, xlim = c(4, 0.5), main = fid_subject)
   dev.off()
 }
+
+
+### another code, works better, but looks through file directory not csv file because read_mrs cant read from csv
+
+file_list <- list.files("~/project/test/codetest", pattern = "\\.nii\\.gz$", full.names = TRUE)
+
+a <- function(file_name) {
+  mrs_data <- read_mrs(file_name, format = 'nifti')
+  mrs_proc <- hsvd_filt(mrs_data, xlim = c(8, 6), scale = 'ppm') #|> shift(-1.90)
+  plot(mrs_proc, xlim = c(4, 0.5))
+  basis <- sim_basis_1h_brain_press(mrs_data)
+  stackplot(basis, xlim = c(5.5, 0.5), labels = basis$names, y_offset = 10)
+  fit_res <- fit_mrs(mrs_proc, basis, opts = abfit_opts(noise_region = c(6, 8)))
+  plot(fit_res)
+  amps <- fit_amps(fit_res)
+  result <- amps
+  t_result <- t(result)
+  print(t_result)
+  
+  spectrum_file <- paste0(file_name, "_spectrum.png")
+  results_file <- paste0(file_name, "_results.txt")
+  
+  dev.copy(png, file = spectrum_file)
+  dev.off()
+  
+  write.table(t_result, file = results_file, sep = "\t", row.names = FALSE)
+}
+
+for (file_name in file_list) {
+  a(file_name)
+}
