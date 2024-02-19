@@ -44,7 +44,7 @@ library(spant)
   t_result <- t(result)
   print(t_result) #transposes and prints concentration values as a txt file 
 
-**## automated code to select a working row from csv file of scan information (IGNORE THIS) ##** 
+**## automated code to select a working row from csv file of scan information (wip) ##** 
 
 install.packages(c("SpecHelpers", "metaboliteID", "NMRProc")) #install required packages 
 library(c(SpecHelpers, metaboliteID, NMRProc))
