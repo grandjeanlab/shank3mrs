@@ -87,7 +87,7 @@ for (i in 1:nrow(fid_data))
 }
 
 
-**another code, works better, but looks through file directory not csv file because read_mrs cant read from csv** 
+**another automated code, works better, but looks through file directory not csv file because read_mrs cant read from csv** 
 
 file_list <- list.files("~/project/test/codetest", pattern = "\\.nii\\.gz$", full.names = TRUE)
 
