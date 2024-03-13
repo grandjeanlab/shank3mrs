@@ -30,6 +30,7 @@ Effect size with unpaired Hedge’s g compared metabolite concentration of WT re
 
 ## Contributions
 <ul style=“list-style-type:circle”>
+<li>  Channelle Tham (Animal data analysis)  </li>
 <li>  Alejandro Rivera-Olvera (Animal data acquisition)  </li>
 <li> Sabrina van Heukelum (Animal data acquisition)  </li>
 <li> Andor Veltien (Lab technician/hardware)  </li>
@@ -39,9 +40,9 @@ Effect size with unpaired Hedge’s g compared metabolite concentration of WT re
 <li> Joanes Grandjean (Daily supervision)  </li>
 </ul>
 
-## Preprocessing
+## Section 1: Preprocessing
 
-### Using spec2nii and python for Bruker (FID) scans 
+### 1A: Using spec2nii for Bruker (FID) scans 
 
 ```html
 source ~/.bashrc
@@ -51,92 +52,52 @@ cd /project/4180000.24/test
 spec2nii bruker -m FID -o /project/4180000.24/test ./20221114_134901_aRi001_1_1_1/18/fid
 ```
 
-### Using spec2nii for Siemens twix (.dat) scans
+### 1B: Using spec2nii for Siemens twix (.dat) scans
 ```html
-No conversion needed
-
+No conversion is needed, change format of to "twix"
+example:
+mrs_data <- read_mrs('~/project/test/human/141793096301/sub-141793096301_PRESS_ACC_unsuppressed.dat', format = "twix")
 ```
 
-### code for linux terminal on HPC (python) ##**
-source ~/.bashrc
-module load anaconda3
-conda activate spec2nii
-cd /project/4180000.24/test
-spec2nii bruker -m FID -o /project/4180000.24/test ./20221114_134901_aRi001_1_1_1/18/fid
-
-### for rstudio window on HPC (R) ##**
-`cd ~/R/x86_64-pc-linux-gnu-library/4.1`
+## Section 2: Using SPANT to producing spectra 
+### 2A: For R/Rstudio on Donders Computer Cluster (HPC)
+```html
+cd ~/R/x86_64-pc-linux-gnu-library/4.1`
 rm -rf 00LOCK*
-rstudio # R version 4.1.0, RStudio version 1.4.1717, 8GB-16GB, load preinstalled packages 
+rstudio # R version 4.1.0, RStudio version 1.4.1717, 8GB-64GB, load preinstalled packages 
 install.packages(“spant”)
 library(spant)
-#if there is a non-zero exit code when installing spant package, delete "00LOCK-spant" from /R/x86_64-pc-linux-gnu-library/4.1
+```
+> [!Note]\
+> If there is a non-zero exit code error when installing SPANT package, delete "00LOCK-spant" folder from /R/x86_64-pc-linux-gnu-library/4.1 
 
-### for fitted and observed spectrum with basis plot information of concentration (manual code) ##**
-  mrs_data <- read_mrs(file_name, format = "nifti") #example --> mrs_data <-     
-  read_mrs('test/FID_001_18.nii.gz')
-  mrs_proc <- hsvd_filt(mrs_data, xlim = c(8, 6), scale = "ppm") |> shift(-1.90)
-  plot(mrs_proc, xlim = c(4, 0.5))
+### 2B: How to manually plot fitted/observed spectrum with basis plot information 
+ ```html
+mrs_data <- read_mrs(file_name, format = "nifti")
+#example --> mrs_data <- read_mrs('test/FID_001_18.nii.gz')
+mrs_proc <- hsvd_filt(mrs_data, xlim = c(8, 6), scale = "ppm") #|> shift(-1.90)
+plot(mrs_proc, xlim = c(4, 0.5))
 
-  basis <- sim_basis_1h_brain_press(mrs_data)
-  print(basis)
+basis <- sim_basis_1h_brain_press(mrs_data)
+print(basis)
 
-  stackplot(basis, xlim = c(5.5, 0.5), labels = basis$names, y_offset = 10)
-  fit_res <- fit_mrs(mrs_proc, basis, opts = abfit_opts(noise_region = c(6, 8)))
-  plot(fit_res)
+stackplot(basis, xlim = c(5.5, 0.5), labels = basis$names, y_offset = 10)
+fit_res <- fit_mrs(mrs_proc, basis, opts = abfit_opts(noise_region = c(6, 8)))
+plot(fit_res)
 
-  amps <- fit_amps(fit_res)
-  print(amps)
+amps <- fit_amps(fit_res)
+print(amps)
 
-  result <- amps
-  t_result <- t(result)
-  print(t_result) #transposes and prints concentration values as a txt file 
+result <- amps
+t_result <- t(result)
+print(t_result) #transposes and prints concentration values as a txt file
 
-### automated code to select a working row from csv file of scan information (wip) ##** 
+spectrum_file <- paste0(file_name, "_spectrum.png")
+results_file <- paste0(file_name, "_results.txt")
+```
 
-install.packages(c("SpecHelpers", "metaboliteID", "NMRProc")) #install required packages 
-library(c(SpecHelpers, metaboliteID, NMRProc))
-
-install.packages(c("readxl", "spant", "readr"))
-library (c(readx, spant, readr))
-
-xlsxcsv <- "xlsxcoding.csv"  #read in CSV file
-fid_data <- read.csv(xlsxcsv, show_col_types = FALSE)
-
-setwd('/content/fids')
-
-for (i in 1:nrow(fid_data))
-
- {
-  fid_subject <- fid_data$file_name[i]
-  file_name <- paste0(fid_subject, ".nii.gz")
-
-  mrs_data <- read_mrs(file_name, format = "nifti")
-  mrs_proc <- hsvd_filt(mrs_data, xlim = c(8, 6), scale = "ppm") |> shift(-shift)
-  plot(mrs_proc, xlim = c(4, 0.5))
-
-  basis <- sim_basis_1h_brain_press(mrs_data)
-  print(basis)
-
-  stackplot(basis, xlim = c(5.5, 0.5), labels = basis$names, y_offset = 10)
-  fit_res <- fit_mrs(mrs_proc, basis, opts = abfit_opts(noise_region = c(6, 8)))
-  plot(fit_res)
-
-  amps <- fit_amps(fit_res)
-  print(amps)
-
-  result <- amps
-  t_result <- t(result)
-  print(t_result)
-
-  png(filename = paste0(fid_subject, "_spectrum.png"))
-  plot(mrs_proc, xlim = c(4, 0.5), main = fid_subject)
-  dev.off()
-}
-
-
-### **another automated code, works better, but looks through file directory not csv file because read_mrs cant read from csv** 
-
+### 2C: How to automatically read from the working directory and plot fitted/observed spectrum 
+ ```html
 file_list <- list.files("~/project/test/codetest", pattern = "\\.nii\\.gz$", full.names = TRUE)
 
 a <- function(file_name) {
@@ -160,8 +121,12 @@ a <- function(file_name) {
   
   write.table(t_result, file = results_file, sep = "\t", row.names = FALSE)
 }
+```
 
-
+### 2D: How to automatically read from a CSV file and plot fitted/observed spectrum 
+ ```html
+TESTING
+```
 
 ## Sources 
 ````html
