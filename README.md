@@ -44,11 +44,18 @@ Effect size with unpaired Hedge’s g compared metabolite concentration of WT re
 
 ### 1A: Using spec2nii for Bruker (FID) scans 
 
+<source ~/.bashrc><br>
+module load anaconda3 <br>
+conda activate spec2nii <br>
+cd /project/4180000.24/test <br>
+
+spec2nii bruker -m 2DSEQ 2DSEQ_FILE_or_DIR 
+<p align="left" > OR </p>
+spec2nii bruker -m FID FID_FILE_or_DIR
+<p
+</p>
+
 ```html
-source ~/.bashrc
-module load anaconda3
-conda activate spec2nii
-cd /project/4180000.24/test
 spec2nii bruker -m FID -o /project/4180000.24/test ./20221114_134901_aRi001_1_1_1/18/fid
 ```
 
@@ -56,7 +63,7 @@ spec2nii bruker -m FID -o /project/4180000.24/test ./20221114_134901_aRi001_1_1_
 ```html
 No conversion is needed, change format of to "twix"
 example:
-mrs_data <- read_mrs('~/project/test/human/141793096301/sub-141793096301_PRESS_ACC_unsuppressed.dat', format = "twix")
+mrs_data <- read_mrs('~/filepath.dat', format = "twix")
 ```
 
 ## Section 2: Using SPANT to producing spectra 
@@ -64,7 +71,14 @@ mrs_data <- read_mrs('~/project/test/human/141793096301/sub-141793096301_PRESS_A
 ```html
 cd ~/R/x86_64-pc-linux-gnu-library/4.1`
 rm -rf 00LOCK*
-rstudio # R version 4.1.0, RStudio version 1.4.1717, 8GB-64GB, load preinstalled packages 
+```
+
+R version: 4.1.0 <br>
+RStudio version: 1.4.1717 <br>
+Memory capacity:  8GB-64GB <br>
+Select "load preinstalled packages" <br>
+
+```html
 install.packages(“spant”)
 library(spant)
 ```
@@ -133,6 +147,28 @@ for (file_name in file_list)
  ```html
 WORK IN PROGRESS
 ```
+## Quality Control Criteria 
+<table border="1">
+  <tr>
+    <th></th>
+    <th>Spectrum Example</th>
+    <th>Notes</th>
+  </tr>
+  <tr>
+    <td>Green</td>
+    <td>...</td>
+  </tr>
+  <tr>
+    <td>Orange</td>
+    <td>...</td>
+  </tr>
+  <tr>
+    <td>Red</td>
+    <td>...</td>
+  </tr>
+</table>
+
+</body>
 
 ## Sources 
 ````html
