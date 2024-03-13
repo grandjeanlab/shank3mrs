@@ -121,18 +121,18 @@ a <- function(file_name) {
   
   write.table(t_result, file = results_file, sep = "\t", row.names = FALSE)
 }
+
+for (file_name in file_list) {
+  a(file_name)
+}
 ```
 
 ### 2D: How to automatically read from a CSV file and plot fitted/observed spectrum 
  ```html
-TESTING
+WORK IN PROGRESS
 ```
 
 ## Sources 
 ````html
 Clarke WT, Bell TK, Emir UE, Mikkelsen M, Oeltzschner G, Shamaei A, Soher BJ, Wilson M. NIfTI-MRS: A standard data format for magnetic resonance spectroscopy. Magn Reson Med. 2022. doi: 10.1002/mrm.29418.
 ````
-
-for (file_name in file_list) {
-  a(file_name)
-}
