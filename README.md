@@ -25,21 +25,6 @@ Human phenotyping research enriches our understanding of the biological correlat
 
 The aim was to uncover shared metabolic alterations in mice, offering a comprehensive understanding of neurodevelopmental metabolic changes. Single voxel PRESS scans were acquired in homologous brain areas—cingulate cortex and thalamus—across three genotypes: SHANK3+/+ (WT), SHANK3-/+ (HET), and SHANK3-/- (KO). Mice, of mixed sexes (Male/Female 1:1), were imaged during adolescence (30 days) or early adulthood (70 days) using a Bruker BioSpec 11.7T. All spectra underwent processing via Spectroscopy Analysis Tools (SPANT) and visual inspection by two analysts, with rigorous quality control measures. 
 
-Effect size with unpaired Hedge’s g compared metabolite concentration of WT relative to HET and KO. A significant effect size for Inositol in the Thalamus (-0.93 [95%CI -1.63, -0.0751]) suggests a plausible difference between WT and KO. Minimal evidence was found for Glutamate's involvement in the thalamus and cingulate cortex. Unexpectedly, Inositol levels were lower in the thalamus, potentially linked to reduced thalamic inflammation in SHANK3 KO mice. Given shared metabolites, alignment between SHANK3 mouse data and human findings was hypothesized. Expanding the study to include group comparisons and a translational perspective could enhance understanding of neurometabolic alterations underlying autism spectrum disorder.
-
-
-## Contributors
-<ul style=“list-style-type:circle”>
-<li>  Channelle Tham (Animal data analysis)  </li>
-<li>  Alejandro Rivera-Olvera (Animal data acquisition)  </li>
-<li> Sabrina van Heukelum (Animal data acquisition)  </li>
-<li> Andor Veltien (Lab technician/hardware)  </li>
-<li> Nicolaas Puts (Human data acquisition)  </li>
-<li> Viola Hollestein (Human data acquisition)  </li>
-<li> Judith Homberg (Supervision)  </li>
-<li> Joanes Grandjean (Daily supervision)  </li>
-</ul>
-
 
 ## Section 1: Preprocessing
 
@@ -261,6 +246,17 @@ insert green, red and orange spectrums and explanations on how to QC
 
 </body>
 
+## Contributors
+<ul style=“list-style-type:circle”>
+<li>  Channelle Tham (Animal data analysis)  </li>
+<li>  Alejandro Rivera-Olvera (Animal data acquisition)  </li>
+<li> Sabrina van Heukelum (Animal data acquisition)  </li>
+<li> Andor Veltien (Lab technician/hardware)  </li>
+<li> Nicolaas Puts (Human data acquisition)  </li>
+<li> Viola Hollestein (Human data acquisition)  </li>
+<li> Judith Homberg (Supervision)  </li>
+<li> Joanes Grandjean (Daily supervision)  </li>
+</ul>
 
 ## Sources 
 ````html
