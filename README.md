@@ -118,7 +118,7 @@ spant 2.18.0
 
 Attaching package: 'spant'
 
-The following object is masked from ?package:stats?:
+The following object is masked from 'package: stats':
 
     sd
 ```
