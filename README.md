@@ -100,7 +100,8 @@ results_file <- paste0(file_name, "_results.txt")
  ```html
 file_list <- list.files("~/project/test/codetest", pattern = "\\.nii\\.gz$", full.names = TRUE)
 
-a <- function(file_name) {
+a <- function(file_name)
+{
   mrs_data <- read_mrs(file_name, format = 'nifti')
   mrs_proc <- hsvd_filt(mrs_data, xlim = c(8, 6), scale = 'ppm') #|> shift(-1.90)
   plot(mrs_proc, xlim = c(4, 0.5))
@@ -122,7 +123,8 @@ a <- function(file_name) {
   write.table(t_result, file = results_file, sep = "\t", row.names = FALSE)
 }
 
-for (file_name in file_list) {
+for (file_name in file_list)
+{
   a(file_name)
 }
 ```
