@@ -182,8 +182,6 @@ tLM13    38.578739
 tLM20   103.305424
 ```
 
-
-
 ### 2C: How to automatically read from the working directory and plot fitted/observed spectrum 
  ```html
 file_list <- list.files("~/project/test/codetest", pattern = "\\.nii\\.gz$", full.names = TRUE)
@@ -203,7 +201,15 @@ a <- function(file_name)
   print(t_result)
   
   spectrum_file <- paste0(file_name, "_spectrum.png")
-  results_file <- paste0(file_name, "_results.txt")
+  results_file <- paste0(file_name, "amps_output.txt")
+
+  input_file_path <- (file_name, "amps_output.txt")
+  output_file_path <- (filename, "amps_tCR_correction.txt")
+  data <- read.table(input_file_path, header = TRUE, sep = "\t")
+  reference_metabolite <- "tCR"
+  reference_index <- which(colnames(data) == reference_metabolite)
+  data[, -reference_index] <- data[, -reference_index] / data[, reference_index]
+  write.table(data, file = output_file_path, sep = "\t", row.names = FALSE)
   
   dev.copy(png, file = spectrum_file)
   dev.off()
@@ -220,6 +226,16 @@ for (file_name in file_list)
 ### 2D: How to automatically read from a CSV file and plot fitted/observed spectrum 
  ```html
 WORK IN PROGRESS
+```
+### 2E: How to manually standardize metabolite values by tCr
+```html
+input_file_path <- "amps_output.txt"
+output_file_path <- "amps_tCR_correction.txt"
+data <- read.table(input_file_path, header = TRUE, sep = "\t")
+reference_metabolite <- "tCR"
+reference_index <- which(colnames(data) == reference_metabolite)
+data[, -reference_index] <- data[, -reference_index] / data[, reference_index]
+write.table(data, file = output_file_path, sep = "\t", row.names = FALSE)
 ```
 
 ## Quality Control Criteria 
