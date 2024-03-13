@@ -75,7 +75,7 @@ rm -rf 00LOCK*
 
 R version: 4.1.0 <br>
 RStudio version: 1.4.1717 <br>
-Memory capacity:  8GB-64GB <br>
+Memory requirement:  8GB-64GB <br>
 Select "load preinstalled packages" <br>
 
 ```html
