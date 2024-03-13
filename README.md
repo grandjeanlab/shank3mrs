@@ -1,64 +1,70 @@
-# shank3mrs
+# Magnetic Resonance Spectroscopy analysis
 
 ---
-"1H spectroscopy in the SHANK3 mouse model for Autism spectrum disorder (Magnetic Resonance Spectroscopy analysis)
+1H spectroscopy in the SHANK3 mouse model for Autism spectrum disorder 
+
 ---
 
 <p align="center">
-<img src= "https://www.socsci.ru.nl/wilberth/donders/donders_logo.svg" 
-alt="Simple Icons" width=300>
+<img src= "https://www.smartnets-etn.eu/wp-content/uploads/2020/08/dondersru-1.png" 
+alt="donderslogo" width=300>
 
 <p align="center">
 <img src="https://upload.wikimedia.org/wikipedia/commons/d/dd/Radboud_university_medical_center_logo.png?20170808070641" 
-alt="Simple Icons" width=300>
-
+alt="radboudumclogo" width=300>
  
 <p align="center">
 MSc Cognitive Neuroscience Thesis
 <p align="center" >Channelle Tham </p>
 </p>
 
-## Usage
+## Abstract
+<!--- > [!IMPORTANT]\
+> We ask that all users read our [legal disclaimer](https://github.com/simple-icons/simple-icons/blob/develop/DISCLAIMER.md) before using icons from Simple Icons. ---> 
+Human phenotyping research enriches our understanding of the biological correlates of neurodevelopmental disorders. However, progressing beyond correlations in human cohorts is challenging. Thus, a comparative analysis was performed using the SHANK3 mouse model of Autism spectrum disorder (ASD). Neurochemical profiling via magnetic resonance spectroscopy (MRS) fingerprinted the metabolite impacts in the SHANK3 mouse model across the cingulate cortex and thalamus. MRS was chosen since it facilitates trans-species comparison since identical metabolites are recorded in homologous brain regions. 
 
-> [!IMPORTANT]\
-> We ask that all users read our [legal disclaimer](https://github.com/simple-icons/simple-icons/blob/develop/DISCLAIMER.md) before using icons from Simple Icons.
+The aim was to uncover shared metabolic alterations in mice, offering a comprehensive understanding of neurodevelopmental metabolic changes. Single voxel PRESS scans were acquired in homologous brain areas—cingulate cortex and thalamus—across three genotypes: SHANK3+/+ (WT), SHANK3-/+ (HET), and SHANK3-/- (KO). Mice, of mixed sexes (Male/Female 1:1), were imaged during adolescence (30 days) or early adulthood (70 days) using a Bruker BioSpec 11.7T. All spectra underwent processing via Spectroscopy Analysis Tools (SPANT) and visual inspection by two analysts, with rigorous quality control measures. 
 
-### General Usage
+Effect size with unpaired Hedge’s g compared metabolite concentration of WT relative to HET and KO. A significant effect size for Inositol in the Thalamus (-0.93 [95%CI -1.63, -0.0751]) suggests a plausible difference between WT and KO. Minimal evidence was found for Glutamate's involvement in the thalamus and cingulate cortex. Unexpectedly, Inositol levels were lower in the thalamus, potentially linked to reduced thalamic inflammation in SHANK3 KO mice. Given shared metabolites, alignment between SHANK3 mouse data and human findings was hypothesized. Expanding the study to include group comparisons and a translational perspective could enhance understanding of neurometabolic alterations underlying autism spectrum disorder.
 
-Icons can be downloaded as SVGs directly from [our website](https://simpleicons.org/) - simply click the download button of the icon you want, and the download will start automatically.
 
-### CDN Usage
+## Contributions
+<ul style=“list-style-type:circle”>
+<li>  Alejandro Rivera-Olvera (Animal data acquisition)  </li>
+<li> Sabrina van Heukelum (Animal data acquisition)  </li>
+<li> Andor Veltien (Lab technician/hardware)  </li>
+<li> Nicolaas Puts (Human data acquisition)  </li>
+<li> Viola Hollestein (Human data acquisition)  </li>
+<li> Judith Homberg (Supervision)  </li>
+<li> Joanes Grandjean (Daily supervision)  </li>
+</ul>
 
-Icons can be served from a CDN such as [jsDelivr](https://www.jsdelivr.com/package/npm/simple-icons) or [Unpkg](https://unpkg.com/browse/simple-icons/). Simply use the `simple-icons` npm package and specify a version in the URL like the following:
+## Preprocessing
+
+### Using spec2nii and python for Bruker (FID) scans 
 
 ```html
-<img height="32" width="32" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/[ICON SLUG].svg" />
-<img height="32" width="32" src="https://unpkg.com/simple-icons@v11/icons/[ICON SLUG].svg" />
+source ~/.bashrc
+module load anaconda3
+conda activate spec2nii
+cd /project/4180000.24/test
+spec2nii bruker -m FID -o /project/4180000.24/test ./20221114_134901_aRi001_1_1_1/18/fid
 ```
 
-Where `[ICON SLUG]` is replaced by the [slug] of the icon you want to use, for example:
-
+### Using spec2nii for Siemens twix (.dat) scans
 ```html
-<img height="32" width="32" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/simpleicons.svg" />
-<img height="32" width="32" src="https://unpkg.com/simple-icons@v11/icons/simpleicons.svg" />
+No conversion needed
+
 ```
 
-
-
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-This is an R Markdown format used for publishing markdown documents to GitHub. When you click the **Knit** button all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
-
-**## code for linux terminal on HPC (python) ##**
+### code for linux terminal on HPC (python) ##**
 source ~/.bashrc
 module load anaconda3
 conda activate spec2nii
 cd /project/4180000.24/test
 spec2nii bruker -m FID -o /project/4180000.24/test ./20221114_134901_aRi001_1_1_1/18/fid
 
-**## for rstudio window on HPC (R) ##**
+### for rstudio window on HPC (R) ##**
 `cd ~/R/x86_64-pc-linux-gnu-library/4.1`
 rm -rf 00LOCK*
 rstudio # R version 4.1.0, RStudio version 1.4.1717, 8GB-16GB, load preinstalled packages 
@@ -66,8 +72,7 @@ install.packages(“spant”)
 library(spant)
 #if there is a non-zero exit code when installing spant package, delete "00LOCK-spant" from /R/x86_64-pc-linux-gnu-library/4.1
 
-
-**## for fitted and observed spectrum with basis plot information of concentration (manual code) ##**
+### for fitted and observed spectrum with basis plot information of concentration (manual code) ##**
   mrs_data <- read_mrs(file_name, format = "nifti") #example --> mrs_data <-     
   read_mrs('test/FID_001_18.nii.gz')
   mrs_proc <- hsvd_filt(mrs_data, xlim = c(8, 6), scale = "ppm") |> shift(-1.90)
@@ -87,7 +92,7 @@ library(spant)
   t_result <- t(result)
   print(t_result) #transposes and prints concentration values as a txt file 
 
-**## automated code to select a working row from csv file of scan information (wip) ##** 
+### automated code to select a working row from csv file of scan information (wip) ##** 
 
 install.packages(c("SpecHelpers", "metaboliteID", "NMRProc")) #install required packages 
 library(c(SpecHelpers, metaboliteID, NMRProc))
@@ -130,7 +135,7 @@ for (i in 1:nrow(fid_data))
 }
 
 
-**another automated code, works better, but looks through file directory not csv file because read_mrs cant read from csv** 
+### **another automated code, works better, but looks through file directory not csv file because read_mrs cant read from csv** 
 
 file_list <- list.files("~/project/test/codetest", pattern = "\\.nii\\.gz$", full.names = TRUE)
 
@@ -155,6 +160,13 @@ a <- function(file_name) {
   
   write.table(t_result, file = results_file, sep = "\t", row.names = FALSE)
 }
+
+
+
+## Sources 
+````html
+Clarke WT, Bell TK, Emir UE, Mikkelsen M, Oeltzschner G, Shamaei A, Soher BJ, Wilson M. NIfTI-MRS: A standard data format for magnetic resonance spectroscopy. Magn Reson Med. 2022. doi: 10.1002/mrm.29418.
+````
 
 for (file_name in file_list) {
   a(file_name)
