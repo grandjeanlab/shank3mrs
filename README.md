@@ -40,6 +40,7 @@ Effect size with unpaired Hedge’s g compared metabolite concentration of WT re
 <li> Joanes Grandjean (Daily supervision)  </li>
 </ul>
 
+
 ## Section 1: Preprocessing
 
 ### 1A: Using spec2nii for Bruker (FID) scans 
@@ -65,6 +66,7 @@ No conversion is needed, change format of to "twix"
 example:
 mrs_data <- read_mrs('~/filepath.dat', format = "twix")
 ```
+
 
 ## Section 2: Using SPANT to producing spectra 
 ### 2A: Installing SPANT for R/Rstudio on Donders Computer Cluster (HPC)
@@ -234,6 +236,7 @@ for (file_name in file_list)
  ```html
 WORK IN PROGRESS
 ```
+
 ## Quality Control Criteria 
 insert green, red and orange spectrums and explanations on how to QC
 <table border="1">
@@ -257,6 +260,7 @@ insert green, red and orange spectrums and explanations on how to QC
 </table>
 
 </body>
+
 
 ## Sources 
 ````html
