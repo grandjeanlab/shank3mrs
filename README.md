@@ -60,7 +60,7 @@ mrs_data <- read_mrs('~/project/test/human/141793096301/sub-141793096301_PRESS_A
 ```
 
 ## Section 2: Using SPANT to producing spectra 
-### 2A: For R/Rstudio on Donders Computer Cluster (HPC)
+### 2A: Installing SPANT for R/Rstudio on Donders Computer Cluster (HPC)
 ```html
 cd ~/R/x86_64-pc-linux-gnu-library/4.1`
 rm -rf 00LOCK*
