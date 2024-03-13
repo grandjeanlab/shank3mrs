@@ -232,12 +232,12 @@ for (file_name in file_list)
 }
 ```
 
-### 2D: How to automatically read from a CSV file and plot fitted/observed spectrum 
+<!--- > ### 2D: How to automatically read from a CSV file and plot fitted/observed spectrum 
  ```html
 WORK IN PROGRESS
 ```
 
-<!--- > ## Quality Control Criteria 
+ ## Quality Control Criteria 
 insert green, red and orange spectrums and explanations on how to QC
 <table border="1">
   <tr>
