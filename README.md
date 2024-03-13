@@ -1,2 +1,161 @@
 # shank3mrs
-MRS study in SHANK3 mice. 
+
+---
+"1H spectroscopy in the SHANK3 mouse model for Autism spectrum disorder (Magnetic Resonance Spectroscopy analysis)
+---
+
+<p align="center">
+<img src= "https://www.socsci.ru.nl/wilberth/donders/donders_logo.svg" 
+alt="Simple Icons" width=300>
+
+<p align="center">
+<img src="https://upload.wikimedia.org/wikipedia/commons/d/dd/Radboud_university_medical_center_logo.png?20170808070641" 
+alt="Simple Icons" width=300>
+
+ 
+<p align="center">
+MSc Cognitive Neuroscience Thesis
+<p align="center" >Channelle Tham </p>
+</p>
+
+## Usage
+
+> [!IMPORTANT]\
+> We ask that all users read our [legal disclaimer](https://github.com/simple-icons/simple-icons/blob/develop/DISCLAIMER.md) before using icons from Simple Icons.
+
+### General Usage
+
+Icons can be downloaded as SVGs directly from [our website](https://simpleicons.org/) - simply click the download button of the icon you want, and the download will start automatically.
+
+### CDN Usage
+
+Icons can be served from a CDN such as [jsDelivr](https://www.jsdelivr.com/package/npm/simple-icons) or [Unpkg](https://unpkg.com/browse/simple-icons/). Simply use the `simple-icons` npm package and specify a version in the URL like the following:
+
+```html
+<img height="32" width="32" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/[ICON SLUG].svg" />
+<img height="32" width="32" src="https://unpkg.com/simple-icons@v11/icons/[ICON SLUG].svg" />
+```
+
+Where `[ICON SLUG]` is replaced by the [slug] of the icon you want to use, for example:
+
+```html
+<img height="32" width="32" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/simpleicons.svg" />
+<img height="32" width="32" src="https://unpkg.com/simple-icons@v11/icons/simpleicons.svg" />
+```
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+This is an R Markdown format used for publishing markdown documents to GitHub. When you click the **Knit** button all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
+
+**## code for linux terminal on HPC (python) ##**
+source ~/.bashrc
+module load anaconda3
+conda activate spec2nii
+cd /project/4180000.24/test
+spec2nii bruker -m FID -o /project/4180000.24/test ./20221114_134901_aRi001_1_1_1/18/fid
+
+**## for rstudio window on HPC (R) ##**
+`cd ~/R/x86_64-pc-linux-gnu-library/4.1`
+rm -rf 00LOCK*
+rstudio # R version 4.1.0, RStudio version 1.4.1717, 8GB-16GB, load preinstalled packages 
+install.packages(“spant”)
+library(spant)
+#if there is a non-zero exit code when installing spant package, delete "00LOCK-spant" from /R/x86_64-pc-linux-gnu-library/4.1
+
+
+**## for fitted and observed spectrum with basis plot information of concentration (manual code) ##**
+  mrs_data <- read_mrs(file_name, format = "nifti") #example --> mrs_data <-     
+  read_mrs('test/FID_001_18.nii.gz')
+  mrs_proc <- hsvd_filt(mrs_data, xlim = c(8, 6), scale = "ppm") |> shift(-1.90)
+  plot(mrs_proc, xlim = c(4, 0.5))
+
+  basis <- sim_basis_1h_brain_press(mrs_data)
+  print(basis)
+
+  stackplot(basis, xlim = c(5.5, 0.5), labels = basis$names, y_offset = 10)
+  fit_res <- fit_mrs(mrs_proc, basis, opts = abfit_opts(noise_region = c(6, 8)))
+  plot(fit_res)
+
+  amps <- fit_amps(fit_res)
+  print(amps)
+
+  result <- amps
+  t_result <- t(result)
+  print(t_result) #transposes and prints concentration values as a txt file 
+
+**## automated code to select a working row from csv file of scan information (wip) ##** 
+
+install.packages(c("SpecHelpers", "metaboliteID", "NMRProc")) #install required packages 
+library(c(SpecHelpers, metaboliteID, NMRProc))
+
+install.packages(c("readxl", "spant", "readr"))
+library (c(readx, spant, readr))
+
+xlsxcsv <- "xlsxcoding.csv"  #read in CSV file
+fid_data <- read.csv(xlsxcsv, show_col_types = FALSE)
+
+setwd('/content/fids')
+
+for (i in 1:nrow(fid_data))
+
+ {
+  fid_subject <- fid_data$file_name[i]
+  file_name <- paste0(fid_subject, ".nii.gz")
+
+  mrs_data <- read_mrs(file_name, format = "nifti")
+  mrs_proc <- hsvd_filt(mrs_data, xlim = c(8, 6), scale = "ppm") |> shift(-shift)
+  plot(mrs_proc, xlim = c(4, 0.5))
+
+  basis <- sim_basis_1h_brain_press(mrs_data)
+  print(basis)
+
+  stackplot(basis, xlim = c(5.5, 0.5), labels = basis$names, y_offset = 10)
+  fit_res <- fit_mrs(mrs_proc, basis, opts = abfit_opts(noise_region = c(6, 8)))
+  plot(fit_res)
+
+  amps <- fit_amps(fit_res)
+  print(amps)
+
+  result <- amps
+  t_result <- t(result)
+  print(t_result)
+
+  png(filename = paste0(fid_subject, "_spectrum.png"))
+  plot(mrs_proc, xlim = c(4, 0.5), main = fid_subject)
+  dev.off()
+}
+
+
+**another automated code, works better, but looks through file directory not csv file because read_mrs cant read from csv** 
+
+file_list <- list.files("~/project/test/codetest", pattern = "\\.nii\\.gz$", full.names = TRUE)
+
+a <- function(file_name) {
+  mrs_data <- read_mrs(file_name, format = 'nifti')
+  mrs_proc <- hsvd_filt(mrs_data, xlim = c(8, 6), scale = 'ppm') #|> shift(-1.90)
+  plot(mrs_proc, xlim = c(4, 0.5))
+  basis <- sim_basis_1h_brain_press(mrs_data)
+  stackplot(basis, xlim = c(5.5, 0.5), labels = basis$names, y_offset = 10)
+  fit_res <- fit_mrs(mrs_proc, basis, opts = abfit_opts(noise_region = c(6, 8)))
+  plot(fit_res)
+  amps <- fit_amps(fit_res)
+  result <- amps
+  t_result <- t(result)
+  print(t_result)
+  
+  spectrum_file <- paste0(file_name, "_spectrum.png")
+  results_file <- paste0(file_name, "_results.txt")
+  
+  dev.copy(png, file = spectrum_file)
+  dev.off()
+  
+  write.table(t_result, file = results_file, sep = "\t", row.names = FALSE)
+}
+
+for (file_name in file_list) {
+  a(file_name)
+}
