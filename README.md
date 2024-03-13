@@ -92,8 +92,17 @@ result <- amps
 t_result <- t(result)
 print(t_result) #transposes and prints concentration values as a txt file
 
+input_file_path <- "t_result.txt"
+output_file_path <- "amps_tCR_correction.txt"
+data <- read.table(input_file_path, header = TRUE, sep = "\t")
+reference_metabolite <- "tCR"
+reference_index <- which(colnames(data) == reference_metabolite)
+data[, -reference_index] <- data[, -reference_index] / data[, reference_index]
+write.table(data, file = output_file_path, sep = "\t", row.names = FALSE)
+
 spectrum_file <- paste0(file_name, "_spectrum.png")
-results_file <- paste0(file_name, "_results.txt")
+results_file <- paste0(file_name, "amps_output.txt")
+
 ```
 ### 2B Example: 
 ```html
@@ -227,18 +236,8 @@ for (file_name in file_list)
  ```html
 WORK IN PROGRESS
 ```
-### 2E: How to manually standardize metabolite values by tCr
-```html
-input_file_path <- "amps_output.txt"
-output_file_path <- "amps_tCR_correction.txt"
-data <- read.table(input_file_path, header = TRUE, sep = "\t")
-reference_metabolite <- "tCR"
-reference_index <- which(colnames(data) == reference_metabolite)
-data[, -reference_index] <- data[, -reference_index] / data[, reference_index]
-write.table(data, file = output_file_path, sep = "\t", row.names = FALSE)
-```
 
-## Quality Control Criteria 
+<!--- > ## Quality Control Criteria 
 insert green, red and orange spectrums and explanations on how to QC
 <table border="1">
   <tr>
@@ -260,7 +259,7 @@ insert green, red and orange spectrums and explanations on how to QC
   </tr>
 </table>
 
-</body>
+</body> ----->
 
 ## Contributors
 <ul style=“list-style-type:circle”>
