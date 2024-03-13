@@ -28,7 +28,7 @@ The aim was to uncover shared metabolic alterations in mice, offering a comprehe
 Effect size with unpaired Hedge’s g compared metabolite concentration of WT relative to HET and KO. A significant effect size for Inositol in the Thalamus (-0.93 [95%CI -1.63, -0.0751]) suggests a plausible difference between WT and KO. Minimal evidence was found for Glutamate's involvement in the thalamus and cingulate cortex. Unexpectedly, Inositol levels were lower in the thalamus, potentially linked to reduced thalamic inflammation in SHANK3 KO mice. Given shared metabolites, alignment between SHANK3 mouse data and human findings was hypothesized. Expanding the study to include group comparisons and a translational perspective could enhance understanding of neurometabolic alterations underlying autism spectrum disorder.
 
 
-## Contributions
+## Contributors
 <ul style=“list-style-type:circle”>
 <li>  Channelle Tham (Animal data analysis)  </li>
 <li>  Alejandro Rivera-Olvera (Animal data acquisition)  </li>
