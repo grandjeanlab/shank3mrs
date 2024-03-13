@@ -193,7 +193,7 @@ tLM20   103.305424
 
 ### 2C: How to automatically read from the working directory and plot fitted/observed spectrum 
  ```html
-file_list <- list.files("~/project/test/codetest", pattern = "\\.nii\\.gz$", full.names = TRUE)
+file_name <- list.files("~/project/test/codetest", pattern = "\\.nii\\.gz$", full.names = TRUE)
 
 a <- function(file_name)
 {
