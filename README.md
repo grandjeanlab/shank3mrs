@@ -88,7 +88,6 @@ library(spant)
 ### 2B: How to manually plot fitted/observed spectrum with basis plot information 
  ```html
 mrs_data <- read_mrs(file_name, format = "nifti")
-#example --> mrs_data <- read_mrs('test/FID_001_18.nii.gz')
 mrs_proc <- hsvd_filt(mrs_data, xlim = c(8, 6), scale = "ppm") #|> shift(-1.90)
 plot(mrs_proc, xlim = c(4, 0.5))
 
@@ -109,6 +108,94 @@ print(t_result) #transposes and prints concentration values as a txt file
 spectrum_file <- paste0(file_name, "_spectrum.png")
 results_file <- paste0(file_name, "_results.txt")
 ```
+### 2B Example: 
+```html
+install.packages("spant")
+library(spant)
+```
+```html
+spant 2.18.0
+
+Attaching package: 'spant'
+
+The following object is masked from ?package:stats?:
+
+    sd
+```
+
+```html
+mrs_data <- read_mrs('test/FID_001_18.nii.gz',format='nifti')
+plot(mrs_data)
+mrs_proc<- hsvd_filt(mrs_data,xlim = c(7,6),scale = 'ppm') |> shift(-1.90)
+plot(mrs_proc,xlim=c(4.5,0.5)) 
+[image of blue spec here]
+```
+
+```html
+basis <- sim_basis_1h_brain_press(mrs_proc)
+print(basis)
+[image of basis set parameters here]
+```
+
+```html
+stackplot(basis, xlim = c(4, 0.5), labels = basis$names, y_offset = 5)
+[stackplot here]
+```
+
+```html
+fit_res <- fit_mrs(mrs_proc, basis, opts = abfit_opts(noise_region = c(6, 8)))
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |======================================================================| 100%
+```
+
+```html
+plot(fit_res)
+[put fitted/observed spectrum here]
+```
+
+```html
+amps <- fit_amps(fit_res)
+amps
+
+X.CrCH2   3.049333
+Ala       0.000000
+Asp       1.944614
+Cr        5.870648
+GABA     14.704498
+Glc       0.000000
+Gln       0.000000
+GSH       2.952613
+Glu      34.348136
+GPC       2.887518
+Ins      10.837776
+Lac       1.507300
+Lip09     0.000000
+Lip13a    4.604497
+Lip13b    0.000000
+Lip20    14.135484
+MM09     14.331642
+MM12      3.456480
+MM14     30.517761
+MM17     15.648993
+MM20     89.169940
+NAA       4.593830
+NAAG      2.316995
+PCh       2.194539
+PCr       4.701732
+sIns      0.000000
+Tau      33.200250
+tNAA      6.910825
+tCr      10.572380
+tCho      5.082057
+Glx      34.348136
+tLM09    14.331642
+tLM13    38.578739
+tLM20   103.305424
+```
+
+
 
 ### 2C: How to automatically read from the working directory and plot fitted/observed spectrum 
  ```html
@@ -148,6 +235,7 @@ for (file_name in file_list)
 WORK IN PROGRESS
 ```
 ## Quality Control Criteria 
+insert green, red and orange spectrums and explanations on how to QC
 <table border="1">
   <tr>
     <th></th>
