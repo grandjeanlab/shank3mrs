@@ -77,6 +77,7 @@ library(spant)
 mrs_data <- read_mrs(file_name, format = "nifti")
 mrs_proc <- hsvd_filt(mrs_data, xlim = c(8, 6), scale = "ppm") #|> shift(-1.90)
 plot(mrs_proc, xlim = c(4, 0.5))
+spectrum_file <- paste0(file_name, "_spectrum.png")
 
 basis <- sim_basis_1h_brain_press(mrs_data)
 print(basis)
@@ -99,8 +100,6 @@ reference_metabolite <- "tCR"
 reference_index <- which(colnames(data) == reference_metabolite)
 data[, -reference_index] <- data[, -reference_index] / data[, reference_index]
 write.table(data, file = output_file_path, sep = "\t", row.names = FALSE)
-
-spectrum_file <- paste0(file_name, "_spectrum.png")
 results_file <- paste0(file_name, "amps_output.txt")
 
 ```
@@ -234,12 +233,72 @@ for (file_name in file_list)
 }
 ```
 
-<!--- > ### 2D: How to automatically read from a CSV file and plot fitted/observed spectrum 
- ```html
-WORK IN PROGRESS
+### 2D: How to automatically read from a CSV file and plot fitted/observed spectrum 
+```html
+# Read the CSV file
+csv_file <- "xlsxcoding.csv" 
+patient_data <- read.csv(csv_file)
+
+# Set the working directory where the patient files are saved
+setwd("~/project/test/codetest") 
+
+# Iterate through each row in the dataframe
+for (i in 1:nrow(patient_data)) 
+{
+  patient_id <- patient_data$file_name[i]
+  phase_shift <- as.numeric(patient_data$PhaseShift[i])
+  
+  if (patient_data$mrsthal_exclude == "Y" | patient_data$mrspfc_exclude == “Y”)  #checks if the subject should be excluded
+{
+    print(paste(“skipping patient", patient_id...))
+    next  # Skip to the next row
+ }
+  
+file_name <- paste0(patient_id, ".nii.gz")
+if (file.exists(file_name)) {
+    # Read MRS data
+    mrs_data <- read_mrs(file_name, format = "nifti")
+    mrs_proc <- hsvd_filt(mrs_data, xlim = c(8, 6), scale = "ppm") |> shift(-phase_shift)
+    plot(mrs_proc, xlim = c(4, 0.5))
+    
+    png(filename = paste0(patient_id, "_spectrum.png"))
+    plot(mrs_proc, xlim = c(4, 0.5))
+
+    basis <- sim_basis_1h_brain_press(mrs_data)
+    print(basis)
+    
+    stackplot(basis, xlim = c(5.5, 0.5), labels = basis$names, y_offset = 10)
+    fit_res <- fit_mrs(mrs_proc, basis, opts = abfit_opts(noise_region = c(6, 8)))
+    plot(fit_res)
+    
+    amps <- fit_amps(fit_res)
+    print(amps)
+    
+    result <- amps
+    t_result <- t(result)
+    print(t_result)
+
+write.table(t_result, file = paste0(patient_id, "_t_result.txt"), sep = "\t", quote = FALSE)
+
+input_file_path <- (patient_id, "_t_result.txt")
+
+data <- read.table(input_file_path, header = TRUE, sep = "\t")
+reference_metabolite <- "tCR"
+reference_index <- which(colnames(data) == reference_metabolite)
+data[, -reference_index] <- data[, -reference_index] / data[, reference_index]
+write.table(data, file = output_file_path, sep = "\t", row.names = FALSE)
+
+write.table(t_result_corrected, file = paste0(patient_id, “_tCRcorrected.txt"), sep = "\t", quote = FALSE)
+    dev.off()
+  } 
+else 
+{
+    print(paste("Patient file", file_name, "not found. Skipping..."))
+  }
+}
 ```
 
- ## Quality Control Criteria 
+<!--- > ## Quality Control Criteria 
 insert green, red and orange spectrums and explanations on how to QC
 <table border="1">
   <tr>
