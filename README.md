@@ -104,7 +104,7 @@ spectrum_file <- paste0(file_name, "_spectrum.png")
 results_file <- paste0(file_name, "amps_output.txt")
 
 ```
-### 2B Example: 
+ <!--- > ### Example: 
 ```html
 install.packages("spant")
 library(spant)
@@ -191,6 +191,7 @@ tLM09    14.331642
 tLM13    38.578739
 tLM20   103.305424
 ```
+---> 
 
 ### 2C: How to automatically read from the working directory and plot fitted/observed spectrum 
  ```html
