@@ -21,16 +21,21 @@ MSc Cognitive Neuroscience Thesis
 ## Abstract
 <!--- > [!IMPORTANT]\
 > We ask that all users read our [legal disclaimer](https://github.com/simple-icons/simple-icons/blob/develop/DISCLAIMER.md) before using icons from Simple Icons. ---> 
-Human phenotyping research enriches our understanding of the biological correlates of neurodevelopmental disorders. However, progressing beyond correlations in human cohorts is challenging. Thus, a comparative analysis was performed using the SHANK3 mouse model of Autism spectrum disorder (ASD). Neurochemical profiling via magnetic resonance spectroscopy (MRS) fingerprinted the metabolite impacts in the SHANK3 mouse model across the cingulate cortex and thalamus. MRS was chosen since it facilitates trans-species comparison since identical metabolites are recorded in homologous brain regions. 
 
-The aim was to uncover shared metabolic alterations in mice, offering a comprehensive understanding of neurodevelopmental metabolic changes. Single voxel PRESS scans were acquired in homologous brain areas—cingulate cortex and thalamus—across three genotypes: SHANK3+/+ (WT), SHANK3-/+ (HET), and SHANK3-/- (KO). Mice, of mixed sexes (Male/Female 1:1), were imaged during adolescence (30 days) or early adulthood (70 days) using a Bruker BioSpec 11.7T. All spectra underwent processing via Spectroscopy Analysis Tools (SPANT) and visual inspection by two analysts, with rigorous quality control measures. 
+Human phenotyping research has historically been used to enrich our understanding of the biological correlates of neurodevelopmental disorders such as autism spectrum disorder. However, advancing beyond correlations in human cohorts presents challenges.
+Thus, a comparative analysis was conducted using the SHANK3 mouse model of autism spectrum disorder 
+Neurochemical profiling via magnetic resonance spectroscopy (MRS) fingerprinted the metabolite impacts in the SHANK3 mouse model across the cingulate cortex and thalamus. MRS was selected as the modality of choice because it facilitates trans-species comparison, since identical metabolites are recorded in homologous brain regions. The aim is to uncover shared metabolic alterations in mice, offering a comprehensive understanding of neurodevelopmental metabolic changes. 
+
+Single voxel PRESS scans were acquired in homologous brain areas—cingulate cortex and thalamus—across three genotypes: SHANK3+/+ (WT), SHANK3-/+ (HET), and SHANK3-/- (KO). Mice, of mixed sexes (male/female 1:1), were imaged during adolescence (30 days) or early adulthood (70 days) on a Bruker BioSpec 11.7T.
+All spectra underwent processing via Spectroscopy Analysis Tools (SPANT) and visual inspection by two analysts, with rigorous quality control measures. 
+Effect size with unpaired Hedge’s g compared metabolite concentration of WT relative to HET and KO.
+
 
 
 ## Section 1: Preprocessing
 
 ### 1A: Using spec2nii for Bruker (FID) scans 
-
-<source ~/.bashrc><br>
+<source ~/.bashrc>
 module load anaconda3 <br>
 conda activate spec2nii <br>
 cd /project/4180000.24/test <br>
