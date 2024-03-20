@@ -47,14 +47,13 @@ spec2nii bruker -m FID FID_FILE_or_DIR
 </p>
 
 ```html
-spec2nii bruker -m FID -o /project/4180000.24/test ./20221114_134901_aRi001_1_1_1/18/fid
+example: spec2nii bruker -m FID -o /project/4180000.24/test ./20221114_134901_aRi001_1_1_1/18/fid
 ```
 
 ### 1B: Using spec2nii for Siemens twix (.dat) scans
-```html
 No conversion is needed, change format of to "twix"
-example:
-mrs_data <- read_mrs('~/filepath.dat', format = "twix")
+```html
+example: mrs_data <- read_mrs('~/filepath.dat', format = "twix")
 ```
 
 
