@@ -126,7 +126,8 @@ mrs_data <- read_mrs('test/FID_001_18.nii.gz',format='nifti')
 plot(mrs_data)
 mrs_proc<- hsvd_filt(mrs_data,xlim = c(7,6),scale = 'ppm') |> shift(-1.90)
 plot(mrs_proc,xlim=c(4.5,0.5)) 
-[image of blue spec here]
+[image of blue spec here] ![raw00118](https://github.com/grandjeanlab/shank3mrs/assets/148197732/c7757274-5bb7-4808-b8d6-1fef8a7642f7)
+
 
 ```
 
