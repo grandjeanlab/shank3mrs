@@ -160,7 +160,6 @@ amps
 
 [amps]
 ```
----> 
 
 ### 2C: How to automatically read from the working directory and plot fitted/observed spectrum 
  ```html
