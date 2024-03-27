@@ -106,7 +106,7 @@ write.table(data, file = output_file_path, sep = "\t", row.names = FALSE)
 results_file <- paste0(file_name, "amps_output.txt")
 
 ```
-### Example: 
+<!--- > ### Example: 
 ```html
 install.packages("spant")
 library(spant)
@@ -162,6 +162,7 @@ amps
 
 [amps]
 ```
+----> 
 
 ### 2C: How to automatically read from the working directory and plot fitted/observed spectrum 
  ```html
