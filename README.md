@@ -57,7 +57,7 @@ example: mrs_data <- read_mrs('~/filepath.dat', format = "twix")
 
 
 ## Section 2: Using SPANT to producing spectra 
-### 2A: Installing SPANT for R/Rstudio on Donders Computer Cluster (HPC)
+### 2A: Installing SPANT for R/Rstudio on Donders High Performance Computer Cluster (HPC)
 ```html
 cd ~/R/x86_64-pc-linux-gnu-library/4.1`
 rm -rf 00LOCK*
@@ -88,6 +88,7 @@ print(basis)
 stackplot(basis, xlim = c(5.5, 0.5), labels = basis$names, y_offset = 10)
 fit_res <- fit_mrs(mrs_proc, basis, opts = abfit_opts(noise_region = c(6, 8)))
 plot(fit_res)
+fit_res$res_tab
 
 amps <- fit_amps(fit_res)
 print(amps)
@@ -154,6 +155,8 @@ fit_res <- fit_mrs(mrs_proc, basis, opts = abfit_opts(noise_region = c(6, 8)))
 ```html
 plot(fit_res)
 [put fitted/observed spectrum here]
+fit_res$res_tab
+[insert output here]
 ```
 
 ```html
@@ -173,11 +176,15 @@ a <- function(file_name)
   mrs_data <- read_mrs(file_name, format = 'nifti')
   mrs_proc <- hsvd_filt(mrs_data, xlim = c(8, 6), scale = 'ppm') #|> shift(-1.90)
   plot(mrs_proc, xlim = c(4, 0.5))
+
   basis <- sim_basis_1h_brain_press(mrs_data)
   stackplot(basis, xlim = c(5.5, 0.5), labels = basis$names, y_offset = 10)
   fit_res <- fit_mrs(mrs_proc, basis, opts = abfit_opts(noise_region = c(6, 8)))
   plot(fit_res)
+  fit_res$res_tab
+
   amps <- fit_amps(fit_res)
+
   result <- amps
   t_result <- t(result)
   print(t_result)
@@ -242,6 +249,7 @@ if (file.exists(file_name)) {
     stackplot(basis, xlim = c(5.5, 0.5), labels = basis$names, y_offset = 10)
     fit_res <- fit_mrs(mrs_proc, basis, opts = abfit_opts(noise_region = c(6, 8)))
     plot(fit_res)
+    fit_res$res_tab
     
     amps <- fit_amps(fit_res)
     print(amps)
