@@ -235,7 +235,6 @@ for (i in 1:nrow(patient_data))
   
 file_name <- paste0(patient_id, ".nii.gz")
 if (file.exists(file_name)) {
-    # Read MRS data
     mrs_data <- read_mrs(file_name, format = "nifti")
     mrs_proc <- hsvd_filt(mrs_data, xlim = c(8, 6), scale = "ppm") |> shift(-patient_data$phaseshift[i])
     plot(mrs_proc, xlim = c(4, 0.5))
