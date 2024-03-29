@@ -88,11 +88,15 @@ print(basis)
 stackplot(basis, xlim = c(5.5, 0.5), labels = basis$names, y_offset = 10)
 fit_res <- fit_mrs(mrs_proc, basis, opts = abfit_opts(noise_region = c(6, 8)))
 plot(fit_res)
-fit_res$res_tab
+stdev_FID<-fit_res$res_tab
+t_stdev_FID <-t(stdev_FID)
+print(t_stdev_FID)
+
+file_path <- "stdev_output.txt"
+write.table(t_stdev_FID, file = file_path, col.names = TRUE, row.names = TRUE) 
 
 amps <- fit_amps(fit_res)
 print(amps)
-
 result <- amps
 t_result <- t(result)
 print(t_result) #transposes and prints concentration values as a txt file
@@ -104,7 +108,7 @@ reference_metabolite <- "tCR"
 reference_index <- which(colnames(data) == reference_metabolite)
 data[, -reference_index] <- data[, -reference_index] / data[, reference_index]
 write.table(data, file = output_file_path, sep = "\t", row.names = FALSE)
-results_file <- paste0(file_name, "amps_output.txt")
+results_file <- paste0(file_name, "tCR_ampsoutput.txt")
 
 ```
 <!--- > ### Example: 
@@ -181,10 +185,15 @@ a <- function(file_name)
   stackplot(basis, xlim = c(5.5, 0.5), labels = basis$names, y_offset = 10)
   fit_res <- fit_mrs(mrs_proc, basis, opts = abfit_opts(noise_region = c(6, 8)))
   plot(fit_res)
+
   fit_res$res_tab
+  stdev_FID<-fit_res$res_tab
+  t_stdev_FID <-t(stdev_FID)
+  print(t_stdev_FID)
+  file_path <- (file_name, "stdev_output.txt")
+  write.table(t_stdev_FID, file = file_path, col.names = TRUE, row.names = TRUE) 
 
   amps <- fit_amps(fit_res)
-
   result <- amps
   t_result <- t(result)
   print(t_result)
@@ -248,8 +257,14 @@ if (file.exists(file_name)) {
     stackplot(basis, xlim = c(5.5, 0.5), labels = basis$names, y_offset = 10)
     fit_res <- fit_mrs(mrs_proc, basis, opts = abfit_opts(noise_region = c(6, 8)))
     plot(fit_res)
+
     fit_res$res_tab
-    
+    stdev_FID<-fit_res$res_tab
+    t_stdev_FID <-t(stdev_FID)
+    print(t_stdev_FID)
+    file_path <- (file_name, "stdev_output.txt")
+    write.table(t_stdev_FID, file = file_path, col.names = TRUE, row.names = TRUE)
+
     amps <- fit_amps(fit_res)
     print(amps)
     
