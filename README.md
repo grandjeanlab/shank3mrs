@@ -296,7 +296,8 @@ else
 ```html
 We normalized the relative concentration ratios of metabolites to the signal of total creatine (phosphocreatine + creatine = tCr), as seen in Section 2D. Using the website estimationstats.com, we compared transgenic groups with shared control, providing standardized mean differences, 95% confidence intervals, effect sizes, and standard deviations
 
-<a href="https://www.estimationstats.com/#/user-guide/shared-control" target="_blank" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background-color: #007bff; text-align: center; text-decoration: none; border-radius: 5px;">Visit Estimation Stats</a>
+<a href="https://www.estimationstats.com" target="_blank" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background-color: #007bff; text-align: center; text-decoration: none; border-radius: 5px;">Visit Estimation Stats</a>
+
 
 ```
 ### 3B: Using the modelbased package to run a contrast analysis 
