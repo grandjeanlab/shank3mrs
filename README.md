@@ -50,7 +50,7 @@ example: spec2nii bruker -m FID -o /project/4180000.24/test ./20221114_134901_aR
 ```
 
 ### 1B: Using spec2nii for Siemens twix (.dat) scans
-No conversion is needed, change format of to "twix"
+No conversion required, change format of to "twix"
 ```html
 example: mrs_data <- read_mrs('~/filepath.dat', format = "twix")
 ```
@@ -291,7 +291,15 @@ else
   }
 }
 ```
-### 3A: How to manually compute linear models analysis 
+## Section 3: Data analysis of metabolite concentration values
+###3A: Computing effect size via Hedge's g
+```html
+We normalized the relative concentration ratios of metabolites to the signal of total creatine (phosphocreatine + creatine = tCr), as seen in Section 2D. Using the website estimationstats.com, we compared transgenic groups with shared control, providing standardized mean differences, 95% confidence intervals, effect sizes, and standard deviations
+
+<a href="https://www.estimationstats.com/#/user-guide/shared-control" target="_blank" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background-color: #007bff; text-align: center; text-decoration: none; border-radius: 5px;">Visit Estimation Stats</a>
+
+```
+### 3B: Using the modelbased package to run a contrast analysis 
 ```html
 install.packages ("tidyverse"); install.packages ("glue"); install.packages ("knitr"); install.packages("data.table")
 install.packages("lme4"); install.packages("multcomp"); install.packages("parameters"); install.packages("effectsize"); install.packages("performance"); install.packages("emmeans"); install.packages("modelbased"); install.packages("effsize"); install.packages("ggpubr"); install.packages("ggplot2"); install.packages("forestplot")
