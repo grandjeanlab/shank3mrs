@@ -1,4 +1,4 @@
-# Magnetic Resonance Spectroscopy analysis
+po# Magnetic Resonance Spectroscopy analysis
 
 ---
 1H spectroscopy in the SHANK3 mouse model for Autism spectrum disorder 
@@ -291,7 +291,10 @@ else
   }
 }
 ```
+#### 3a How to manually compute linear models analysis 
+```html
 
+```
 <!--- > ## Quality Control Criteria 
 insert green, red and orange spectrums and explanations on how to QC
 <table border="1">
