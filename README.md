@@ -292,7 +292,7 @@ else
 }
 ```
 ## Section 3: Data analysis of metabolite concentration values
-###3A: Computing effect size via Hedge's g
+### 3A: Computing effect size via Hedge's g
 ```html
 We normalised the relative concentration ratios of metabolites to the signal of total creatine (phosphocreatine + creatine = tCr), as seen in Section 2D. Using the website estimationstats.com, we compared the normalised values from transgenic groups with shared control, providing standardized mean differences, 95% confidence intervals, effect sizes, and standard deviations
 ```
