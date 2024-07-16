@@ -1,4 +1,4 @@
-po# Magnetic Resonance Spectroscopy analysis
+Magnetic Resonance Spectroscopy analysis
 
 ---
 1H spectroscopy in the SHANK3 mouse model for Autism spectrum disorder 
