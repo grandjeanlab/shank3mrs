@@ -22,13 +22,9 @@ MSc Cognitive Neuroscience Thesis
 <!--- > [!IMPORTANT]\
 > We ask that all users read our [legal disclaimer](https://github.com/simple-icons/simple-icons/blob/develop/DISCLAIMER.md) before using icons from Simple Icons. ---> 
 
-Human phenotyping research has historically been used to enrich our understanding of the biological correlates of neurodevelopmental disorders such as autism spectrum disorder. However, advancing beyond correlations in human cohorts presents challenges. The current study presents a comparative analysis using the SHANK3 mouse model to investigate neurometabolic changes associated with autism spectrum disorder. 
-We conducted neurochemical profiling via magnetic resonance spectroscopy, which fingerprinted the metabolite changes in the SHANK3 mouse model across the cingulate cortex and thalamus. 
-By selecting magnetic resonance spectroscopy, we enabled cross-species comparison and examined identical metabolites in homologous brain regions across different species.
-We aimed to provide a comprehensive understanding of the neurodevelopmental alterations associated with autism spectrum disorder. 
-
-To achieve this, our primary objective is to discover shared neurometabolic changes and loss of function in SHANK3 mice. We acquired single voxel PRESS scans in homologous brain areas—cingulate cortex and thalamus—across three genotypes: SHANK3+/+ (WT), SHANK3-/+ (HET), and SHANK3-/- (KO). We imaged mixed-sex mice (Male/Female 1:1) during adolescence (30 days) or early adulthood (70 days) using a Bruker BioSpec 11.7T with CryoProbe. 
-All spectral data underwent processing via Spectroscopy Analysis Tools (SPANT) with rigorous quality control measures and visual inspection by two analysts. Effect size with unpaired Hedge’s g compared metabolite concentration of WT relative to HET and KO mice. 
+Research on human phenotyping has broadened our knowledge of the genetic foundations of neurodevelopmental disorders notably autism spectrum disorder. But moving beyond correlations in human cohorts is not without its difficulties. In this study, a comparative approach is taken to examine neurometabolic differences linked to autism using the SHANK3 mouse model.
+Proton (1H) magnetic resonance spectroscopy was used to track neurochemical alterations in the transgenic mice models. The concentrations of in vivo neurometabolites are measured using this non-invasive method. We acquired single voxel PRESS scans in homologous brain areas—the cingulate cortex and thalamus—across three genotypes: SHANK3+/+ (WT), SHANK3-/+ (HET), and SHANK3-/- (KO). We imaged mixed-sex mice (1:1 male/female ratio) during adolescence (30 days) or early adulthood (70 days) using a Bruker BioSpec 11.7T scanner. 
+All spectral data were processed using Spectroscopy Analysis Tools (SPANT), with rigorous quality control measures and visual inspection by two analysts. We compared metabolite concentrations using effect size analysis with unpaired Hedge’s g, and examined how genotype affects metabolite levels in wild-type, heterozygous, and homozygous mice. 
 
 
 ## Section 1: Preprocessing
