@@ -27,7 +27,7 @@ Proton (1H) magnetic resonance spectroscopy was used to track neurochemical alte
 All spectral data were processed using Spectroscopy Analysis Tools (SPANT), with rigorous quality control measures and visual inspection by two analysts. We compared metabolite concentrations using effect size analysis with unpaired Hedge’s g, and examined how genotype affects metabolite levels in wild-type, heterozygous, and homozygous mice. 
 
 
-## Section 1: Preprocessing
+## Section 1: Preprocessing and data conversion using spec2nii
 
 ### 1A: Using spec2nii for Bruker (FID) scans 
 <source ~/.bashrc>
@@ -52,7 +52,7 @@ example: mrs_data <- read_mrs('~/filepath.dat', format = "twix")
 ```
 
 
-## Section 2: Using SPANT to producing spectra 
+## Section 2: Visual analysis and spectra production using SPANT
 ### 2A: Installing SPANT for R/Rstudio on Donders High Performance Computer Cluster (HPC)
 ```html
 cd ~/R/x86_64-pc-linux-gnu-library/4.1`
@@ -71,7 +71,8 @@ library(spant)
 > [!Note]\
 > If there is a non-zero exit code error when installing SPANT package, delete "00LOCK-spant" folder from /R/x86_64-pc-linux-gnu-library/4.1 
 
-### 2B: How to manually plot fitted/observed spectrum with basis plot information 
+### 2B: How to manually plot spectra  
+
  ```html
 mrs_data <- read_mrs(file_name, format = "nifti")
 mrs_proc <- hsvd_filt(mrs_data, xlim = c(8, 6), scale = "ppm") #|> shift(-1.90)
@@ -167,7 +168,8 @@ amps
 ```
 ----> 
 
-### 2C: How to automatically read from the working directory and plot fitted/observed spectrum 
+### 2C:  Automatically importing data from the working directory to plot spectra 
+
  ```html
 file_name <- list.files("~/project/test/codetest", pattern = "\\.nii\\.gz$", full.names = TRUE)
 
@@ -217,7 +219,7 @@ for (file_name in file_list)
 }
 ```
 
-### 2D: How to automatically read from a CSV file and plot fitted/observed spectrum 
+### 2D: Automatically importing data from a CSV file to plot spectra 
 ```html
 # Read the CSV file
 csv_file <- "xlsxcoding.csv" 
@@ -288,7 +290,7 @@ else
 }
 ```
 ## Section 3: Data analysis of metabolite concentration values
-### 3A: Computing effect size via Hedge's g
+### 3A: Computing effect size with Hedge's g
 ```html
 We normalised the relative concentration ratios of metabolites to the signal of total creatine (phosphocreatine + creatine = tCr), as seen in Section 2D.
 ```
