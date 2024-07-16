@@ -291,145 +291,31 @@ else
   }
 }
 ```
-### 3a How to manually compute linear models analysis 
+### 3A: How to manually compute linear models analysis 
 ```html
-# set the working directory where the patient files are saved
-setwd("/cloud/project/linmods")
+install.packages ("tidyverse"); install.packages ("glue"); install.packages ("knitr"); install.packages("data.table")
+install.packages("lme4"); install.packages("multcomp"); install.packages("parameters"); install.packages("effectsize"); install.packages("performance"); install.packages("emmeans"); install.packages("modelbased"); install.packages("effsize"); install.packages("ggpubr"); install.packages("ggplot2"); install.packages("forestplot")
 
-## install necessary packages
-#General utility packages
-	install.packages ("tidyverse"); install.packages ("glue"); install.packages ("knitr"); install.packages("data.table")
+library("tidyverse"); library("glue"); library("knitr"); library("data.table"); library("lme4"); library("multcomp"); library("parameters"); library("effectsize"); library("performance"); library("emmeans"); library("modelbased"); library("ggpubr"); library("ggplot2"); library("forestplot"); library(effsize)
 
-#Stats packages
-	install.packages("lme4"); install.packages("multcomp"); install.packages("parameters"); install.packages("effectsize"); install.packages("performance"); install.packages("emmeans"); install.packages("modelbased")
-	install.packages("modelbased")
-	library(modelbased)
-	
-	install.packages("effsize")
-	library(effsize)
-	
-# Plot packages
-	install.packages("ggpubr"); install.packages("ggplot2"); install.packages("forestplot")
-
-#load in packages
-	library("tidyverse"); library("glue"); library("knitr"); library("data.table"); library("lme4"); library("multcomp"); library("parameters"); library("effectsize"); library("performance"); library("emmeans"); library("modelbased"); library("ggpubr"); library("ggplot2"); library("forestplot")
-
-## manual way to do lin model
-# read the CSV files
 pfc_file <- "linmod_pfc.csv" 
 pfc_data <- read.csv(pfc_file)
 
 thal_file <- "linmod_thal.csv"
 thal_data <- read.csv(thal_file)
 
-# load in metabolite names from CSVs
-metab_tCr <- c("CrCH2_tCR", "Ala_tCR", "Asp_tCR", "Cr_tCR", "GABA_tCR", "Glc_tCR", "Gln_tCR", "GSH_tCR", "Glu_tCR", "GPC_tCR", "Ins_tCR", "Lac_tCR", "Lip09_tCR", "Lip13a_tCR", "Lip13b_tCR", "Lip20_tCR", "MM09_tCR", "MM12_tCR", "MM14_tCR", "MM17_tCR", "MM20_tCR", "tLM20_tCR")
+metab_tCR <- c("CrCH2_tCR", "Ala_tCR", "Asp_tCR", "Cr_tCR", "GABA_tCR", "Glc_tCR", "Gln_tCR", "GSH_tCR", "Glu_tCR", "GPC_tCR", "Ins_tCR", "Lac_tCR", "Lip09_tCR", "Lip13a_tCR", "Lip13b_tCR", "Lip20_tCR", "MM09_tCR", "MM12_tCR", "MM14_tCR", "MM17_tCR", "MM20_tCR", "tLM20_tCR")
 metab_stdev <- c("CrCH2_stdev", "Ala_stdev", "Asp_stdev", "Cr_stdev", "GABA_stdev", "Glc_stdev", "Gln_stdev", "GSH_stdev", "Glu_stdev", "GPC_stdev", "Ins_stdev", "Lac_stdev", "Lip09_stdev", "Lip13a_stdev", "Lip13b_stdev", "Lip20_stdev", "MM09_stdev", "MM12_stdev", "MM14_stdev", "MM17_stdev", "MM20_stdev", "tLM20_stdev")
 
-# thalamus linear model code default
-mod_[metab] <- lm([metab_tCr] ~ genotype + sex + age, data = df, weights = 1/[metab_stdev])
+#default
+mod_[metab] <- lm([metab_tCR] ~ genotype + sex + age, data = df, weights = 1/[metab_stdev])
 contrasts <- estimate_contrasts(mod_[metab], at= "genotype")
 
-# cohens d calculation 
-# example --> cohens_metab <- t_to_d(contrasts_[metab])
-install.packages("modelbased")
-library(modelbased)
-
-t_to_d(0.322,31)
-#t value,df
-t_to_do
-
-
+#example
 mod_CrCH2 <- lm(CrCH2_tCR ~ genotype + sex + age, data = thal_data, weights = 1/CrCH2_stdev)
 contrasts_CrCH2 <- estimate_contrasts(mod_CrCH2, at= "genotype")
-
-mod_Ala <- lm(Ala_tCR ~ genotype + sex + age, data = thal_data, weights = 1/Ala_stdev)
-contrasts_Ala <- estimate_contrasts(mod_Ala, at= "genotype")
-
-mod_Asp <- lm(Asp_tCR ~ genotype + sex + age, data = thal_data, weights = 1/Asp_stdev)
-contrasts_Asp <- estimate_contrasts(mod_Asp, at= "genotype")
-
-mod_Cr <- lm(Cr_tCR ~ genotype + sex + age, data = thal_data, weights = 1/Cr_stdev)
-contrasts_Cr <- estimate_contrasts(mod_Cr, at= "genotype")
-
-mod_GABA <- lm(GABA_tCR ~ genotype + sex + age, data = thal_data, weights = 1/GABA_stdev)
-contrasts_GABA <- estimate_contrasts(mod_GABA, at= "genotype")
-
-mod_Glc <- lm(Glc_tCR ~ genotype + sex + age, data = thal_data, weights = 1/Glc_stdev)
-contrasts_Glc <- estimate_contrasts(mod_Glc, at= "genotype")
-
-mod_Gln <- lm(Gln_tCR ~ genotype + sex + age, data = thal_data, weights = 1/Gln_stdev)
-contrasts_Gln <- estimate_contrasts(mod_Gln, at= "genotype")
-
-mod_GSH <- lm(GSH_tCR ~ genotype + sex + age, data = thal_data, weights = 1/GSH_stdev)
-contrasts_GSH <- estimate_contrasts(mod_GSH, at= "genotype")
-
-mod_Glu <- lm(Glu_tCR ~ genotype + sex + age, data = thal_data, weights = 1/Glu_stdev)
-contrasts_Glu <- estimate_contrasts(mod_Glu, at= "genotype")
-
-mod_GPC <- lm(GPC_tCR ~ genotype + sex + age, data = thal_data, weights = 1/GPC_stdev)
-contrasts_GPC <- estimate_contrasts(mod_GPC, at= "genotype")
-
-mod_Ins <- lm(Ins_tCR ~ genotype + sex + age, data = thal_data, weights = 1/Ins_stdev)
-contrasts_Ins <- estimate_contrasts(mod_Ins, at= "genotype")
-
-mod_Lac <- lm(Lac_tCR ~ genotype + sex + age, data = thal_data, weights = 1/Lac_stdev)
-contrasts_Lac <- estimate_contrasts(mod_Lac, at= "genotype")
-
-mod_Lip09 <- lm(Lip09_tCR ~ genotype + sex + age, data = thal_data, weights = 1/Lip09_stdev)
-contrasts_Lip09 <- estimate_contrasts(mod_Lip09, at= "genotype")
-
-mod_Lip13a <- lm(Lip13a_tCR ~ genotype + sex + age, data = thal_data, weights = 1/Lip13a_stdev)
-contrasts_Lip13a <- estimate_contrasts(mod_Lip13a, at= "genotype")
-
-mod_Lip13b <- lm(Lip13b_tCR ~ genotype + sex + age, data = thal_data, weights = 1/Lip13b_stdev)
-contrasts_Lip13b <- estimate_contrasts(mod_Lip13b, at= "genotype")
-
-mod_Lip20 <- lm(Lip20_tCR ~ genotype + sex + age, data = thal_data, weights = 1/Lip20_stdev)
-contrasts_Lip20 <- estimate_contrasts(mod_Lip20, at= "genotype")
-
-mod_MM09 <- lm(MM09_tCR ~ genotype + sex + age, data = thal_data, weights = 1/MM09_stdev)
-contrasts_MM09 <- estimate_contrasts(mod_MM09, at= "genotype")
-
-mod_MM12 <- lm(MM12_tCR ~ genotype + sex + age, data = thal_data, weights = 1/MM12_stdev)
-contrasts_MM12 <- estimate_contrasts(mod_MM12, at= "genotype")
-
-mod_MM14 <- lm(MM14_tCR ~ genotype + sex + age, data = thal_data, weights = 1/MM14_stdev)
-contrasts_MM14 <- estimate_contrasts(mod_MM14, at= "genotype")
-
-mod_MM17 <- lm(MM17_tCR ~ genotype + sex + age, data = thal_data, weights = 1/MM17_stdev)
-contrasts_MM17 <- estimate_contrasts(mod_MM17, at= "genotype")
-
-mod_MM20 <- lm(MM20_tCR ~ genotype + sex + age, data = thal_data, weights = 1/MM20_stdev)
-contrasts_MM20 <- estimate_contrasts(mod_MM20, at= "genotype")
-
-mod_tLM20 <- lm(tLM20_tCR ~ genotype + sex + age, data = thal_data, weights = 1/tLM20_stdev)
-contrasts_tLM20 <- estimate_contrasts(mod_tLM20, at= "genotype")
-
 ```
-<!--- > ## Quality Control Criteria 
-insert green, red and orange spectrums and explanations on how to QC
-<table border="1">
-  <tr>
-    <th></th>
-    <th>Spectrum Example</th>
-    <th>Notes</th>
-  </tr>
-  <tr>
-    <td>Green</td>
-    <td>...</td>
-  </tr>
-  <tr>
-    <td>Orange</td>
-    <td>...</td>
-  </tr>
-  <tr>
-    <td>Red</td>
-    <td>...</td>
-  </tr>
-</table>
 
-</body> ----->
 
 ## Contributors
 <ul style=“list-style-type:circle”>
