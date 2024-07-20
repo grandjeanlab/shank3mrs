@@ -107,64 +107,6 @@ write.table(data, file = output_file_path, sep = "\t", row.names = FALSE)
 results_file <- paste0(file_name, "tCR_ampsoutput.txt")
 
 ```
-### 2B Example: 
-```r
-install.packages("spant")
-library(spant)
-```
-```r
-spant 2.18.0
-
-Attaching package: 'spant'
-
-The following object is masked from 'package: stats':
-
-    sd
-```
-
-```r
-mrs_data <- read_mrs('test/FID_001_18.nii.gz',format='nifti')
-plot(mrs_data)
-mrs_proc<- hsvd_filt(mrs_data,xlim = c(7,6),scale = 'ppm') |> shift(-1.90)
-plot(mrs_proc,xlim=c(4.5,0.5)) 
-[image of blue spec here]
-![](https:/github.com/grandjeanlab/shank3mrs/blob/main/raw00118.png)
-
-
-```
-
-```r
-basis <- sim_basis_1h_brain_press(mrs_proc)
-print(basis)
-[image of basis set parameters here]
-```
-
-```r
-stackplot(basis, xlim = c(4, 0.5), labels = basis$names, y_offset = 5)
-[basis stackplot here]
-```
-
-```html
-fit_res <- fit_mrs(mrs_proc, basis, opts = abfit_opts(noise_region = c(6, 8)))
-  |                                                                            
-  |                                                                      |   0%
-  |                                                                            
-  |======================================================================| 100%
-```
-
-```r
-plot(fit_res)
-[put fitted/observed spectrum here]
-fit_res$res_tab
-[insert output here]
-```
-
-```r
-amps <- fit_amps(fit_res)
-amps
-
-[amps]
-```
 
 
 ### 2C:  Automatically importing data from the working directory to plot spectra 
@@ -336,5 +278,10 @@ contrasts_CrCH2 <- estimate_contrasts(mod_CrCH2, at= "genotype")
 
 ## Sources 
 ````html
-Clarke WT, Bell TK, Emir UE, Mikkelsen M, Oeltzschner G, Shamaei A, Soher BJ, Wilson M. NIfTI-MRS: A standard data format for magnetic resonance spectroscopy. Magn Reson Med. 2022. doi: 10.1002/mrm.29418.
+Clarke, W. T., Bell, T. K., Emir, U. E., Mikkelsen, M., Oeltzschner, G., Shamaei, A., Soher, B. J., & Wilson, M. (2022). NIfTI-MRS: A standard data format for magnetic resonance spectroscopy. Magnetic Resonance in Medicine.
+https://doi.org/10.1002/mrm.29418
+
+Wilson, M. (2021). spant: An R package for magnetic resonance spectroscopy 
+Analysis. Journal of Open Source Software, 6(67), 3646
+https://doi.org/10.21105/joss.03646
 ````
