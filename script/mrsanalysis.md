@@ -18,19 +18,23 @@ cd /project/4180000.24/test
 - Automatic orientation = Yes 
   
 ```html
-spec2nii bruker -m 2DSEQ 2DSEQ_FILE_or_DIR OR spec2nii bruker -m FID FID_FILE_or_DIR
+spec2nii bruker -m 2DSEQ 2DSEQ_FILE_or_DIR 
+spec2nii bruker -m FID FID_FILE_or_DIR
 ```
 
 
 ### 1B: Using spec2nii for Siemens twix (.dat) scans
-No conversion needed for SPANT, you can use .dat file for processing
+No conversion needed for SPANT, you can use .dat file for processing </p>
+  EXAMPLE: mrs_data <- read_mrs('~/filepath.dat', format = "twix")
+
 - Format	= Siemens
 - File extension = .dat
 - SVS = Yes
-- MRSI = Partial handling (see Note #1 below) 
+- MRSI = Partial handling (see Note below) 
 - Automatic orientation = Yes
 
-> [!Note 1]
+
+> [!NOTE]
 > As spec2nii is not a reconstruction program, it cannot convert MRSI data. Far too little information is held in the twix headers to reconstruct arbitrary k,t-space data. However, if passed a file containing MRSI data spec2nii will attempt to create an empty NIfTI-MRS file with the correct orientation information, data shape, and header information. This empty file can then have data inserted from an offline reconstruction routine.
 > Source: https://github.com/wtclarke/spec2nii
 
@@ -50,7 +54,7 @@ Select "load preinstalled packages" <br>
 install.packages(“spant”)
 library(spant)
 ```
-> [!Note #2]\
+> [!TIP]
 > If there is a non-zero exit code error when installing SPANT package, delete "00LOCK-spant" folder from /R/x86_64-pc-linux-gnu-library/4.1 
 
 ### 2B: How to manually plot spectra  
