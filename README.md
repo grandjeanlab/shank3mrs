@@ -123,11 +123,14 @@ The following object is masked from 'package: stats':
 ```r
 mrs_data <- read_mrs('test/FID_001_18.nii.gz',format='nifti')
 plot(mrs_data)
+```
+![raw00118](https://github.com/grandjeanlab/shank3mrs/blob/c65736768e1eafcf37e89dc3168c5f8b1e1ea295/raw00118.png)
+
+```r
 mrs_proc<- hsvd_filt(mrs_data,xlim = c(7,6),scale = 'ppm') |> shift(-1.90)
 plot(mrs_proc,xlim=c(4.5,0.5)) 
-[image of blue spec here]
 ```
-![raw00118](http://shank3mrs/main/figure/raw00118.png)
+
 
 
 ```r
