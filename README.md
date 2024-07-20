@@ -141,8 +141,8 @@ print(basis)
 
 ```r
 stackplot(basis, xlim = c(4, 0.5), labels = basis$names, y_offset = 5)
-[basis stackplot here]
 ```
+![stackplot00118](https://github.com/grandjeanlab/shank3mrs/blob/9c1c2039ed6f01ae2600355a71edcb2efa4b7d5c/stackplot00118.png)
 
 ```r
 fit_res <- fit_mrs(mrs_proc, basis, opts = abfit_opts(noise_region = c(6, 8)))
@@ -155,6 +155,7 @@ fit_res <- fit_mrs(mrs_proc, basis, opts = abfit_opts(noise_region = c(6, 8)))
 ```r
 plot(fit_res)
 [put fitted/observed spectrum here]
+
 fit_res$res_tab
 [insert output here]
 ```
