@@ -78,7 +78,7 @@ mrs_proc <- hsvd_filt(mrs_data, xlim = c(8, 6), scale = "ppm") #|> shift(-1.90)
 plot(mrs_proc, xlim = c(4, 0.5))
 spectrum_file <- paste0(file_name, "_spectrum.png")
 
-basis <- sim_basis_1h_brain_press(mrs_data)
+basis <- sim_basis_1h_brain_press(mrs_proc)
 print(basis)
 
 stackplot(basis, xlim = c(5.5, 0.5), labels = basis$names, y_offset = 10)
@@ -122,25 +122,22 @@ The following object is masked from 'package: stats':
 
 ```r
 mrs_data <- read_mrs('test/FID_001_18.nii.gz',format='nifti')
-plot(mrs_data)
+mrs_proc<- hsvd_filt(mrs_data,xlim = c(7,6),scale = 'ppm') |> shift(-1.90)
+plot(mrs_proc,xlim=c(4,0.5))
+spectrum_file <- paste0(FID_001_18, "_spectrum.png")
 ```
 ![raw00118](https://github.com/grandjeanlab/shank3mrs/blob/c65736768e1eafcf37e89dc3168c5f8b1e1ea295/raw00118.png)
-
-```r
-mrs_proc<- hsvd_filt(mrs_data,xlim = c(7,6),scale = 'ppm') |> shift(-1.90)
-plot(mrs_proc,xlim=c(4.5,0.5)) 
-```
-
 
 
 ```r
 basis <- sim_basis_1h_brain_press(mrs_proc)
 print(basis)
-[image of basis set parameters here]
 ```
+![setpara00118](https://github.com/grandjeanlab/shank3mrs/blob/774bc6e61120d08f3f1636870d5f26772a04ab8a/setpara00118.png)
+
 
 ```r
-stackplot(basis, xlim = c(4, 0.5), labels = basis$names, y_offset = 5)
+stackplot(basis, xlim = c(5.5, 0.5), labels = basis$names, y_offset = 5)
 ```
 ![stackplot00118](https://github.com/grandjeanlab/shank3mrs/blob/9c1c2039ed6f01ae2600355a71edcb2efa4b7d5c/stackplot00118.png)
 
@@ -150,25 +147,37 @@ fit_res <- fit_mrs(mrs_proc, basis, opts = abfit_opts(noise_region = c(6, 8)))
   |                                                                      |   0%
   |                                                                            
   |======================================================================| 100%
+
+plot(fit_res)
 ```
+![fitted00118](https://github.com/grandjeanlab/shank3mrs/blob/774bc6e61120d08f3f1636870d5f26772a04ab8a/fitted00118.png)
 
 ```r
-plot(fit_res)
-[put fitted/observed spectrum here]
+stdev_FID<-fit_res$res_tab
+t_stdev_FID <-t(stdev_FID)
+print(t_stdev_FID)
 
-fit_res$res_tab
-[insert output here]
+file_path <- "stdev_output.txt"
+write.table(t_stdev_FID, file = file_path, col.names = TRUE, row.names = TRUE) 
 ```
 
 ```r
 amps <- fit_amps(fit_res)
-amps
-[amps]
-```
+print(amps)
+result <- amps
+t_result <- t(result)
+print(t_result) #transposes and prints concentration values as a txt file
 
-```r
-(!)[plot](./figure/
+input_file_path <- "t_result.txt"
+output_file_path <- "amps_tCR_correction.txt"
+data <- read.table(input_file_path, header = TRUE, sep = "\t")
+reference_metabolite <- "tCR"
+reference_index <- which(colnames(data) == reference_metabolite)
+data[, -reference_index] <- data[, -reference_index] / data[, reference_index]
+write.table(data, file = output_file_path, sep = "\t", row.names = FALSE)
+results_file <- paste0(file_name, "tCR_ampsoutput.txt")
 ```
+![amps00118.png](https://github.com/grandjeanlab/shank3mrs/blob/774bc6e61120d08f3f1636870d5f26772a04ab8a/amps00118.png) 
 
 ### 2C:  Automatically importing data from the working directory to plot spectra 
 
