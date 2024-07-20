@@ -126,7 +126,7 @@ mrs_proc<- hsvd_filt(mrs_data,xlim = c(7,6),scale = 'ppm') |> shift(-1.90)
 plot(mrs_proc,xlim=c(4,0.5))
 spectrum_file <- paste0(FID_001_18, "_spectrum.png")
 ```
-![raw00118](https://github.com/grandjeanlab/shank3mrs/blob/c65736768e1eafcf37e89dc3168c5f8b1e1ea295/raw00118.png)
+![spec00118](https://github.com/grandjeanlab/shank3mrs/blob/633d6ea44bc26910416707b100b0b4120177e577/figure/spec00118.png)
 
 
 ```r
@@ -156,7 +156,6 @@ plot(fit_res)
 stdev_FID<-fit_res$res_tab
 t_stdev_FID <-t(stdev_FID)
 print(t_stdev_FID)
-
 file_path <- "stdev_output.txt"
 write.table(t_stdev_FID, file = file_path, col.names = TRUE, row.names = TRUE) 
 ```
