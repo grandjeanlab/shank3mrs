@@ -2,29 +2,39 @@
 ## Section 1: Preprocessing and data conversion using spec2nii
 
 ### 1A: Using spec2nii for Bruker (FID) scans 
-<source ~/.bashrc>
-module load anaconda3 <br>
-conda activate spec2nii <br>
-cd /project/4180000.24/test <br>
+#### Activating the Anaconda environment to install spec2nii
+````html
+source ~/.bashrc
+module load anaconda3 
+conda activate spec2nii 
+cd /project/4180000.24/test 
+````
 
-spec2nii bruker -m 2DSEQ 2DSEQ_FILE_or_DIR 
-<p align="left" > OR </p>
-spec2nii bruker -m FID FID_FILE_or_DIR
-<p
-</p>
-
+#### Converting Bruker scans to  NIfTI-MRS
+- Format	= Bruker
+- File extension = fid OR 2dseq
+- SVS = Yes
+- MRSI = Yes
+- Automatic orientation = Yes 
+  
 ```html
-example: spec2nii bruker -m FID -o /project/4180000.24/test ./20221114_134901_aRi001_1_1_1/18/fid
+spec2nii bruker -m 2DSEQ 2DSEQ_FILE_or_DIR OR spec2nii bruker -m FID FID_FILE_or_DIR
 ```
+
 
 ### 1B: Using spec2nii for Siemens twix (.dat) scans
-No conversion required, change format of to "twix"
-```html
-example: mrs_data <- read_mrs('~/filepath.dat', format = "twix")
-```
+No conversion needed for SPANT, you can use .dat file for processing
+- Format	= Siemens
+- File extension = .dat
+- SVS = Yes
+- MRSI = Partial handling (see Note #1 below) 
+- Automatic orientation = Yes
 
+> [!Note 1]
+> As spec2nii is not a reconstruction program, it cannot convert MRSI data. Far too little information is held in the twix headers to reconstruct arbitrary k,t-space data. However, if passed a file containing MRSI data spec2nii will attempt to create an empty NIfTI-MRS file with the correct orientation information, data shape, and header information. This empty file can then have data inserted from an offline reconstruction routine.
+> Source: https://github.com/wtclarke/spec2nii
 
-## Section 2: Visual analysis and spectra production using SPANT
+## Section 2: Spectra production using SPANT
 ### 2A: Installing SPANT for R/Rstudio on Donders High Performance Computer Cluster (HPC)
 ```html
 cd ~/R/x86_64-pc-linux-gnu-library/4.1`
@@ -40,7 +50,7 @@ Select "load preinstalled packages" <br>
 install.packages(“spant”)
 library(spant)
 ```
-> [!Note]\
+> [!Note #2]\
 > If there is a non-zero exit code error when installing SPANT package, delete "00LOCK-spant" folder from /R/x86_64-pc-linux-gnu-library/4.1 
 
 ### 2B: How to manually plot spectra  
@@ -304,5 +314,4 @@ contrasts <- estimate_contrasts(mod_[metab], at= "genotype")
 mod_CrCH2 <- lm(CrCH2_tCR ~ genotype + sex + age, data = thal_data, weights = 1/CrCH2_stdev)
 contrasts_CrCH2 <- estimate_contrasts(mod_CrCH2, at= "genotype")
 ```
-
 
