@@ -1,1 +1,20 @@
-name	genotype	age	sex	weight	rotation	shift	thal file	PFC file	mrsthal_exclude	mrspfc_exclude	exclusion reason
+### Description of CSV files
+
+Name	
+Genotype	
+Age	
+Sex	
+Weight	
+Rotation	
+Shift	
+Thal file	
+CC file	
+mrsthal_exclude	
+mrspfc_exclude	
+exclusion reason
+
+Metabolites
+Metabolites_stdev
+Metabolites_tCr
+[list] CrCH2_tCR", "Ala_tCR", "Asp_tCR", "Cr_tCR", "GABA_tCR", "Glc_tCR", "Gln_tCR", "GSH_tCR", "Glu_tCR", "GPC_tCR", "Ins_tCR", "Lac_tCR", "Lip09_tCR", "Lip13a_tCR", "Lip13b_tCR", "Lip20_tCR", "MM09_tCR", "MM12_tCR", "MM14_tCR", "MM17_tCR", "MM20_tCR", "tLM20_tCR
+
