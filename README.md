@@ -107,12 +107,12 @@ write.table(data, file = output_file_path, sep = "\t", row.names = FALSE)
 results_file <- paste0(file_name, "tCR_ampsoutput.txt")
 
 ```
-<!--- > ### Example: 
-```html
+### Example: 
+```r
 install.packages("spant")
 library(spant)
 ```
-```html
+```r
 spant 2.18.0
 
 Attaching package: 'spant'
@@ -122,24 +122,24 @@ The following object is masked from 'package: stats':
     sd
 ```
 
-```html
+```r
 mrs_data <- read_mrs('test/FID_001_18.nii.gz',format='nifti')
 plot(mrs_data)
 mrs_proc<- hsvd_filt(mrs_data,xlim = c(7,6),scale = 'ppm') |> shift(-1.90)
 plot(mrs_proc,xlim=c(4.5,0.5)) 
 [image of blue spec here]
-!(https://github.com/grandjeanlab/shank3mrs/blob/main/raw00118.png)
+![](https:/github.com/grandjeanlab/shank3mrs/blob/main/raw00118.png)
 
 
 ```
 
-```html
+```r
 basis <- sim_basis_1h_brain_press(mrs_proc)
 print(basis)
 [image of basis set parameters here]
 ```
 
-```html
+```r
 stackplot(basis, xlim = c(4, 0.5), labels = basis$names, y_offset = 5)
 [basis stackplot here]
 ```
@@ -152,20 +152,20 @@ fit_res <- fit_mrs(mrs_proc, basis, opts = abfit_opts(noise_region = c(6, 8)))
   |======================================================================| 100%
 ```
 
-```html
+```r
 plot(fit_res)
 [put fitted/observed spectrum here]
 fit_res$res_tab
 [insert output here]
 ```
 
-```html
+```r
 amps <- fit_amps(fit_res)
 amps
 
 [amps]
 ```
-----> 
+
 
 ### 2C:  Automatically importing data from the working directory to plot spectra 
 
