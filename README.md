@@ -107,7 +107,7 @@ write.table(data, file = output_file_path, sep = "\t", row.names = FALSE)
 results_file <- paste0(file_name, "tCR_ampsoutput.txt")
 
 ```
-### Example: 
+### 2B Example: 
 ```r
 install.packages("spant")
 library(spant)
