@@ -127,7 +127,7 @@ mrs_proc<- hsvd_filt(mrs_data,xlim = c(7,6),scale = 'ppm') |> shift(-1.90)
 plot(mrs_proc,xlim=c(4.5,0.5)) 
 [image of blue spec here]
 ```
-![raw00118](HTTP://shank3mrs/main/figure/raw00118.png)
+![raw00118](http://shank3mrs/main/figure/raw00118.png)
 
 
 ```r
