@@ -48,7 +48,7 @@ Wilson, M. (2021). spant: An R package for magnetic resonance spectroscopy
 Analysis. Journal of Open Source Software, 6(67), 3646
 https://doi.org/10.21105/joss.03646
 
-## OSF Registration
+## OSF preregistration
 ````html
 https://doi.org/10.17605/OSF.IO/JKB6T
 ````
