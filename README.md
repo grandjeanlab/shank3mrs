@@ -1,20 +1,18 @@
 <span style="font-size:0.9em;"> Shank3 and magnetic resonance spectroscopy  </span>
 ---
-<span style="font-size:0.6em;"> Investigating neurometabolic patterns using magnetic resonance spectroscopy in the SHANK3 mouse model of autism spectrum disorder.
-</span>
 
----
+### Investigating neurometabolic patterns using magnetic resonance spectroscopy in the SHANK3 mouse model of autism spectrum disorder.
 
-<p align="center">
-<img src= "[frontcoverfig](https://github.com/grandjeanlab/shank3mrs/main/figure/blob/8e60abbc349084924f145c7f10f7991e39188955/figure/thalaccfig.png)" 
-alt="fig" width=300>
 
- 
-<p align="center">
-MSc Cognitive Neuroscience Thesis
-<p align="center"><i>Channelle Tham</i></p>
-<p align="center"><i>Donders Institute and Radboud University</i></p>
+
+![frontcoverfig](https://github.com/grandjeanlab/shank3mrs/blob/53330568f9b35c4c7316d9d5838dd0f94805f069/figure/thalaccfig.png)
+
+<p align="center"> 
+<p align="center"><i style="font-size:50px;">Channelle Tham</i></p>
+<p align="center"><i>Donders Institute and RadboudUMC </i></p>
 </p>
+</p>
+
 
 ## Abstract
 Research on human phenotyping has broadened our knowledge of the genetic foundations of neurodevelopmental disorders, notably autism spectrum disorder. However, moving beyond correlations in human cohorts presents difficulties. In this study, we examine neurometabolic differences linked to autism using the SHANK3 mouse model. We use proton (1H) magnetic resonance spectroscopy to track neurochemical alterations in the transgenic mouse models. This non-invasive method measures the concentrations of in vivo neurometabolites.
@@ -22,8 +20,8 @@ Research on human phenotyping has broadened our knowledge of the genetic foundat
 We acquired single voxel PRESS scans in homologous brain areas—the cingulate cortex and thalamus—across three genotypes: SHANK3+/+ (wildtype), SHANK3-/+ (heterozygous), and SHANK3-/- (knockout homozygous). We imaged mixed-sex mice during adolescence (30 days post-natal) or early adulthood (70 days post-natal) using a Bruker BioSpec 11.7T scanner. We processed all spectral data using Spectroscopy Analysis Tools (SPANT), with rigorous quality control measures and visual inspection by two analysts. We compared metabolite concentrations using effect size analysis with unpaired Hedge’s g, examining how genotype affects metabolite levels in wild-type, heterozygous, and homozygous mice.
 
 ## Goals
-1. To uncover region-specific neurometabolic differences associated with autism by using the SHANK3 mouse model
-2. To test the effectiveness of alternative spectroscopy analysis software
+1. To document region-specific neurometabolic differences associated with the SHANK3 mouse model
+2. To examine the downstream metabolic consequences caused by Shank3 disruptions
 3. To bridge the gap between preclinical findings and human phenotyping
 
 ## Contributors
@@ -32,8 +30,6 @@ We acquired single voxel PRESS scans in homologous brain areas—the cingulate c
 <li>  Alejandro Rivera-Olvera (Animal data acquisition)  </li>
 <li> Sabrina van Heukelum (Animal data acquisition)  </li>
 <li> Andor Veltien (Lab technician/hardware)  </li>
-<li> Nicolaas Puts (Human data acquisition)  </li>
-<li> Viola Hollestein (Human data acquisition)  </li>
 <li> Judith Homberg (Supervision)  </li>
 <li> Joanes Grandjean (Daily supervision)  </li>
 </ul>
@@ -50,5 +46,3 @@ https://doi.org/10.21105/joss.03646
 ````html
 https://doi.org/10.17605/OSF.IO/JKB6T
 ````
-## Deviations from preregistration
-
