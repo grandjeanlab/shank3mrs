@@ -19,7 +19,7 @@
 - Mice were weighed in grams prior to the data acquisition session
   
 ### Rotation	
-- Used to adjust the orientation of the chemical shift axis or the spectrum itself to correct for distortions or misalignments
+- Used to adjust the phase orientation of the chemical shift axis or the spectrum itself to correct for distortions or misalignments
 
 ### Shift	
 - Represents the amount by which the spectral data is shifted along the chemical shift axis, typically in parts per million (ppm).
