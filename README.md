@@ -52,3 +52,5 @@ https://doi.org/10.21105/joss.03646
 ````html
 https://doi.org/10.17605/OSF.IO/JKB6T
 ````
+## Deviations from preregistration
+
