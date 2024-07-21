@@ -6,16 +6,14 @@
 ---
 
 <p align="center">
-<img src= "https://www.smartnets-etn.eu/wp-content/uploads/2020/08/dondersru-1.png" 
-alt="donderslogo" width=300>
+<img src= "[frontcoverfig](https://github.com/grandjeanlab/shank3mrs/main/figure/blob/8e60abbc349084924f145c7f10f7991e39188955/figure/thalaccfig.png)" 
+alt="fig" width=300>
 
-<p align="center">
-<img src="https://upload.wikimedia.org/wikipedia/commons/d/dd/Radboud_university_medical_center_logo.png?20170808070641" 
-alt="radboudumclogo" width=300>
  
 <p align="center">
 MSc Cognitive Neuroscience Thesis
 <p align="center"><i>Channelle Tham</i></p>
+<p align="center"><i>Donders Institute and Radboud University</i></p>
 </p>
 
 ## Abstract
