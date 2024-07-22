@@ -42,7 +42,13 @@ Wilson, M. (2021). spant: An R package for magnetic resonance spectroscopy
 Analysis. Journal of Open Source Software, 6(67), 3646
 https://doi.org/10.21105/joss.03646
 
-## OSF preregistration
+## OSF preregistration and deviations
 ````html
 https://doi.org/10.17605/OSF.IO/JKB6T
 ````
+The following are notable deviations from the planned methodology:
+- We excluded human autism and Phelan-McDermid syndrome cohort data from the study due to data acquisition issues at LEAP facilities. 
+- Due to time constraints, we scanned and processed 92 of the planned 120 mice.
+- Lastly, we refined and specified the voxels of interest from the prefrontal cortex to the anterior cingulate cortex.
+
+
